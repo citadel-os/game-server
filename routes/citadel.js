@@ -1,13 +1,9 @@
-const express = require('express')
+const express = require("express");
 
-let app = express.Router()
+const router = express.Router();
 
-app.get('/', function (req, res) {
-    res.send('citadel')
-});
+const CitadelController = require("../controllers/citadel");
 
-app.get('/:id', function (req, res) {
-    res.send('citadel: ' + req.params.id);
-});
+router.get("/", CitadelController.getAllCitadel);
 
-module.exports = app
+module.exports = router;
