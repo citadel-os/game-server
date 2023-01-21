@@ -1,9 +1,13 @@
-//const CitadelService = require("../services/citadelService");
-
 class CitadelController {
-  async getAllCitadel(req, res) {
 
-    res.status(200).json({"count": 1024});
+  async getAllCitadel(req, res) {
+    const pool = req.app.locals.pool;
+    pool.query('SELECT * FROM citadel ORDER BY id ASC', (error, results) => {
+      if (error) {
+        throw error
+      }
+      res.status(200).json({"rows": results.rows})
+    })
   }
 }
 

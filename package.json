@@ -20,8 +20,21 @@
   "homepage": "https://github.com/citadel-os/game-server#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^6.7.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pg": "^8.8.0",
+    "web3": "^1.8.1",
+    "@nomiclabs/hardhat-ethers": "^2.0.3",
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
+    "@openzeppelin/contracts-ethereum-package": "^3.0.0",
+    "@alch/alchemy-web3": "^1.1.9",
+    "@openzeppelin/hardhat-upgrades": "^1.12.0",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.5.4",
+    "file-system": "^2.2.2",
+    "hardhat": "^2.8.0",
+    "hardhat-gas-reporter": "^1.0.6",
+    "keccak256": "1.0.6"
   }
 }
