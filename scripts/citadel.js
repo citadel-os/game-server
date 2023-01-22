@@ -5,25 +5,23 @@ const PUBLIC_KEY = process.env.PUBLIC_KEY;
 const PILOT_NFT = process.env.PILOT_NFT;
 const CITADEL_GAMEV1 = process.env.CITADEL_GAMEV1;
 
-const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const web3 = createAlchemyWeb3(API_URL);
-const abi = require("./contracts/abi.js");
 
-const contract = require("../artifacts/contracts/PilotNFT.sol/PilotNFT.json");
-const nftContract = new web3.eth.Contract(abi.abiCitadelGameV1, CITADEL_GAMEV1);
 
-async function getGasPrice() {
-  const price = await web3.eth.getGasPrice();
-  return price;
+async function getCitadel(citadelId) {
+  const GameV1 = await ethers.getContractFactory("CitadelGameV1");
+  const gameV1 = await GameV1.attach(CITADEL_GAMEV1);
+  var citadel = await gameV1.getCitadel(citadelId);
+  console.log(citadel)
+  return citadel;
 }
 
 
 function main() {
-  getGasPrice().then(result => {
+  getCitadel(999).then(result => {
     console.log(result);
-  }).error(err => {
-
-  })
+  });
   console.log("done");
 }
+
+main();
 
