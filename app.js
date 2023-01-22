@@ -12,9 +12,6 @@ const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_HOST = process.env.DB_HOST;
 
-console.log(DB_HOST, DB_USERNAME, DB_PASSWORD);
-
-
 const app = express();
 app.use(cors());
 
