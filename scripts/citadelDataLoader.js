@@ -1,4 +1,4 @@
-module.exports = class CitadelDataLoader {
+class CitadelDataLoader {
 
   constructor(pool, gameV1) {
     this.pool = pool;
@@ -6,17 +6,15 @@ module.exports = class CitadelDataLoader {
   }
 
   async loadData() {
-    console.log(this.pool);
-    console.log("blah");
-    console.log(this.gameV1);
-    // var citadel = await gameV1.getCitadel(citadelId);
-    // console.log(citadel)
-    // return citadel;
+
+    var citadel = await this.gameV1.getCitadel(999);
+    console.log(citadel)
+    return citadel;
   }
 
 }
 
-//module.exports = CitadelDataLoader;
+module.exports = CitadelDataLoader;
 
 
 

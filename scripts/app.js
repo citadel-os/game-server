@@ -24,7 +24,7 @@ async function loadCitadel() {
 
 function main() {
     loadCitadel().then(result => {
-      console.log("loader done");
+      console.log("citadel data loader done");
     });
     console.log("done");
   }
