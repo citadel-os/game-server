@@ -13,7 +13,7 @@ app.use(cors());
 
 const pool = new Pool({
   user: 'max',
-  host: 'localhost',
+  host: '80.78.22.142',
   database: 'citadel',
   password: 'bugbox',
   port: 5432,
@@ -44,6 +44,7 @@ app.use((err, req, res, next) => {
   res.json({ error: err.message, message: "operation failed" });
 });
 
+console.log("server starting on port 8000");
 app.listen(8000);
 
 module.exports = app;

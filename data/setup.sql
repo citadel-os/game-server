@@ -1,5 +1,5 @@
 CREATE DATABASE citadel;
-CREATE USER max WITH ENCRYPTED PASSWORD '';
+CREATE USER max WITH ENCRYPTED PASSWORD 'bugbox';
 GRANT ALL PRIVILEGES ON DATABASE citadel TO max;
 GRANT ALL ON ALL TABLES IN SCHEMA public to max;
 
@@ -42,7 +42,7 @@ CREATE TABLE pilot (
 
 CREATE TABLE citadelPilot (
     citadelId INTEGER,
-    pilotId INTEGER
+    pilotId INTEGER,
     PRIMARY KEY (citadelId, pilotId)
 );
 
