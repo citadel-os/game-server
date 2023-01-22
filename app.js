@@ -5,17 +5,26 @@ const logger = require("morgan");
 const Pool = require('pg').Pool;
 const citadelRoute = require("./routes/citadel");
 const { application } = require("express");
+require('dotenv').config();
+
+// env variables
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_HOST = process.env.DB_HOST;
+
+console.log(DB_HOST, DB_USERNAME, DB_PASSWORD);
 
 
 const app = express();
 app.use(cors());
 
 
+
 const pool = new Pool({
-  user: 'max',
-  host: '80.78.22.142',
+  user: DB_USERNAME,
+  host: DB_HOST,
   database: 'citadel',
-  password: 'bugbox',
+  password: DB_PASSWORD,
   port: 5432,
 });
 
