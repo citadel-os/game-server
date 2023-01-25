@@ -51,3 +51,6 @@ CREATE TABLE grid (
     isLit BOOLEAN,
     multiple INTEGER
 );
+
+ALTER TABLE citadel
+ADD COLUMN pilotCount INTEGER;

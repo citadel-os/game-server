@@ -11,6 +11,9 @@ Runs on http://localhost:8000/
 ## run tests
 `npm test`
 
+## run data loader
+`npx hardhat run loader/appLoader.js --network goerli`
+
 ## data model
     citadel
         id: int
@@ -27,6 +30,7 @@ Runs on http://localhost:8000/
         shield: int
         fleetPoints: int
         level: int
+        pilotCount: int
 
     citadelFleet
         citadelId int
@@ -104,6 +108,7 @@ Runs on http://localhost:8000/
                 subjugation: string
             }
         ],
+        pilotCount: int,
         timeOfLastClaim: int,
         timeLit: int,
         timeLastRaided: int,

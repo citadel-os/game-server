@@ -4,7 +4,6 @@ const cors = require("cors");
 const logger = require("morgan");
 const Pool = require('pg').Pool;
 const citadelRoute = require("./routes/citadel");
-const { application } = require("express");
 require('dotenv').config();
 
 // env variables
@@ -14,8 +13,6 @@ const DB_HOST = process.env.DB_HOST;
 
 const app = express();
 app.use(cors());
-
-
 
 const pool = new Pool({
   user: DB_USERNAME,
