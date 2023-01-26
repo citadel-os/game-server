@@ -1,15 +1,23 @@
+const queries = require("../data/queries");
+const map = require("../utilities/map");
+
 class CitadelController {
 
+
   async getAllCitadel(req, res) {
-    console.log("good");
     const pool = req.app.locals.pool;
-    pool.query('SELECT * FROM citadel ORDER BY id ASC', (error, results) => {
-      if (error) {
-        throw error
-      }
-      res.status(200).json({"rows": results.rows})
-    })
+    let allCitadel = [];
+    let results = await pool.query(queries.GET_ALL_CITADEL);
+    let citadel = map.mapCitadel(results.rows[0]);
+    for(let i=0; i < results.rows.length; i++) {
+      let citadel = map.mapCitadel(results.rows[i]);
+      allCitadel.push(citadel);
+    }
+    
+    res.status(200).json(allCitadel);
   }
 }
+
+
 
 module.exports = new CitadelController();

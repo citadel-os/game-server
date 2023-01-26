@@ -1,3 +1,5 @@
+const queries = require("../data/queries");
+
 class CitadelDataLoader {
 
   ETH_DIVISOR = 1000000000000000000;
@@ -11,7 +13,7 @@ class CitadelDataLoader {
   }
 
   async loadData() {
-    for(let i=997; i<1024; i++) {
+    for(let i=0; i<1024; i++) {
       let citadelStats = await this.gameV1.getCitadel(i);
       let citadelMining = await this.gameV1.getCitadelMining(i);
       let citadelFleetCount = await this.gameV1.getCitadelFleetCount(i);
@@ -35,21 +37,7 @@ class CitadelDataLoader {
 
       this.citadel.push(citadel);
 
-      let updtCitadelQuery = `
-        UPDATE citadel
-        SET walletAddress = $1,
-        gridId = $2,
-        factionId = $3,
-        fleetPoints = $4,
-        timeLit = $5,
-        timeOfLastClaim = $6,
-        timeLastRaided = $7,
-        unclaimedDrakma = $8,
-        isOnline = $9,
-        pilotCount = $10
-        WHERE id = $11`
-
-      let resultsCitadelUpdt = await this.pool.query(updtCitadelQuery, [
+      let resultsCitadelUpdt = await this.pool.query(queries.UPDATE_CITADEL, [
         citadel.walletAddress, 
         citadel.gridId, 
         citadel.factionId, 
@@ -63,27 +51,12 @@ class CitadelDataLoader {
         citadel.id
       ]);
 
-      let updtGridQuery = `
-        UPDATE grid
-        SET isLit = $1
-        WHERE id = $2`
-
-      let resultsGridUpdt = await this.pool.query(updtGridQuery, [
+      let resultsGridUpdt = await this.pool.query(queries.UPDATE_GRID, [
         citadel.isLit, 
         citadel.gridId
       ]);
 
-      let updtCitadelFeetQuery = `
-        UPDATE citadelFleet
-        SET sifGattaca = $1,
-        mhrudvogThrot = $2,
-        drebentraakht = $3,
-        sifGattacaTraining = $4,
-        mhrudvogThrotTraining = $5,
-        drebentraakhtTraining = $6
-        WHERE citadelId = $7`
-
-      let resultsCitadelFleetUpdt = await this.pool.query(updtCitadelFeetQuery, [
+      let resultsCitadelFleetUpdt = await this.pool.query(queries.UPDATE_FLEET, [
         citadelFleetCount[0].toNumber(),
         citadelFleetCount[1].toNumber(),
         citadelFleetCount[2].toNumber(),

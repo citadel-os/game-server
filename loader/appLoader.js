@@ -26,7 +26,6 @@ function main() {
     loadCitadel().then(result => {
       console.log("citadel data loader done");
     });
-    console.log("done");
   }
   
   main();
