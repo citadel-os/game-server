@@ -49,7 +49,7 @@ CREATE TABLE citadelPilot (
 CREATE TABLE grid (
     id INTEGER PRIMARY KEY,
     isLit BOOLEAN,
-    multiple INTEGER
+    multiple NUMERIC
 );
 
 ALTER TABLE citadel

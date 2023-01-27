@@ -1,5 +1,5 @@
 const constants = {
-    SHIELDS: [
+    SHIELD: [
         "DAG SGIATH",
         "XZCID MAGH",
         "TELUM RATIO",
@@ -9,7 +9,7 @@ const constants = {
         "MYSTERIUM",
         "MARBHADH GREINE"
     ],
-    ENGINES: [
+    ENGINE: [
         "HAG GOTOR",
         "CHOBAKK", 
         "TELUM MAK",
@@ -19,7 +19,7 @@ const constants = {
         "DSGILL MAK",
         "DREADNAUGHT",
     ],
-    WEAPON_SYSTEMS: [
+    WEAPON_SYSTEM: [
         "RRAKATAKHT FUROR",
         "AG HALMAHHER",
         "TELUM FUROR",
@@ -28,7 +28,16 @@ const constants = {
         "VEERDACHT MAGH",
         "MARBHADH GHXST",
         "DEI IUDICIUM"
+    ],
+    FACTION: [
+        "ANNEXATION",
+        "AUTONOMOUS ZONE",
+        "THE SANCTION",
+        "THE NETWORK STATE",
+        "UBOJ"
     ]
 };
+
+module.exports = constants;
 
 

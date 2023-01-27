@@ -20,10 +20,11 @@ class CitadelDataLoader {
       let citadelFleetTrainingCount = await this.gameV1.getCitadelFleetCountTraining(i);
 
       let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR)
-
+      let gridId = citadelStats[1].toNumber() == 0 ? null : citadelStats[1].toNumber();
       let citadel = {
         id: i,
         walletAddress: citadelStats[0],
+        gridId: gridId,
         factionId: citadelStats[2],
         pilotCount: citadelStats[3].toNumber(),
         isLit: citadelStats[4],

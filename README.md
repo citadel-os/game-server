@@ -166,16 +166,16 @@ Runs on http://localhost:8000/
         carryCapacity: int,
         drakmaClaimed: int,
         timeHit: int,
-        
     }
 
 
 
 ## endpoints
-    getAllCitadel: [citadel]
-    getCitadelById: citadel
-    getAllGrid: [grid]
-    getReports: [report]
-    getRaid: raid
+    GET getAllCitadel: [citadel]
+    GET getCitadelById: citadel
+    GET getAllGrid: [grid]
+    GET getReports: [report]
+    GET getRaid: raid
+    PUT updateCitadel: citadel 
 
 
