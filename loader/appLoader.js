@@ -6,7 +6,6 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_HOST = process.env.DB_HOST;
 const CITADEL_GAMEV1 = process.env.CITADEL_GAMEV1;
 
-
 const pool = new Pool({
     user: DB_USERNAME,
     host: DB_HOST,

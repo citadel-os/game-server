@@ -49,8 +49,8 @@ app.use((err, req, res, next) => {
   res.json({ error: err.message, message: "operation failed" });
 });
 
-console.log("server starting on port 8000");
-app.listen(8000);
+console.log("server starting on port 3000");
+app.listen(3000);
 
 module.exports = app;
 

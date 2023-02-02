@@ -14,6 +14,9 @@ Runs on http://localhost:8000/
 ## run data loader
 `npx hardhat run loader/appLoader.js --network goerli`
 
+## from server
+`/scripts/run_loader.sh > /tmp/loader.log 2>&1 &`
+
 ## data model
     citadel
         id: int

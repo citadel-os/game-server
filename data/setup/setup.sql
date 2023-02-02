@@ -52,5 +52,15 @@ CREATE TABLE grid (
     multiple NUMERIC
 );
 
+CREATE TABLE activeRaids (
+    fromCitadel INTEGER PRIMARY KEY,
+    toCitadel INTEGER,
+    sifGattaca INTEGER,
+    mhrudvogThrot INTEGER,
+    drebentraakht INTEGER,
+    pilotCount INTEGER,
+    timeRaidHits INTEGER
+)
+
 ALTER TABLE citadel
 ADD COLUMN pilotCount INTEGER;

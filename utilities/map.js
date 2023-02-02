@@ -10,12 +10,12 @@ function mapCitadel(dbCitadel) {
             multiple: dbCitadel.multiple
         },
         fleet: {
-            sifgattaca: dbCitadel.sifgattaca,
-            mhrudvogthrot: dbCitadel.mhrudvogthrot,
+            siFgattaca: dbCitadel.sifgattaca,
+            mhrudvogThrot: dbCitadel.mhrudvogthrot,
             drebentraakht: dbCitadel.drebentraakht,
-            sifgattacatraining: dbCitadel.sifgattacatraining,
-            mhrudvogthrottraining: dbCitadel.mhrudvogthrottraining,
-            drebentraakhttraining: dbCitadel.drebentraakhttraining
+            sifGattacaTraining: dbCitadel.sifgattacatraining,
+            mhrudvogThrotTraining: dbCitadel.mhrudvogthrottraining,
+            drebentraakhtTraining: dbCitadel.drebentraakhttraining
         },
         pilots: [],
         pilotCount: dbCitadel.pilotcount,
@@ -24,7 +24,7 @@ function mapCitadel(dbCitadel) {
         timeLastRaided: dbCitadel.timelastraided,
         unclaimedDrakma: dbCitadel.unclaimeddrakma,
         isOnline: dbCitadel.isonline,
-        faction: constants.FACTION[dbCitadel.faction],
+        faction: constants.FACTION[dbCitadel.factionid],
         weaponSystem: constants.WEAPON_SYSTEM[dbCitadel.weaponsystem],
         engine: constants.ENGINE[dbCitadel.engine],
         shield: constants.SHIELD[dbCitadel.shield],
