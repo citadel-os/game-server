@@ -60,7 +60,7 @@ CREATE TABLE activeRaids (
     drebentraakht INTEGER,
     pilotCount INTEGER,
     timeRaidHits INTEGER
-)
+);
 
 ALTER TABLE citadel
 ADD COLUMN pilotCount INTEGER;

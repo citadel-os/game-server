@@ -15,13 +15,12 @@ class CitadelDataLoader {
   async loadData() {
     let runForever = true;
     while (runForever) {
-      for(let i=0; i<1024; i++) {
+      for(let i=995; i<1024; i++) {
         let citadelStats = await this.gameV1.getCitadel(i);
         let citadelMining = await this.gameV1.getCitadelMining(i);
         let citadelFleetCount = await this.gameV1.getCitadelFleetCount(i);
         let citadelFleetTrainingCount = await this.gameV1.getCitadelFleetCountTraining(i);
         let raid = await this.gameV1.getRaid(i);
-        console.log(raid)
   
         let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR)
         let gridId = citadelStats[1].toNumber() == 0 ? null : citadelStats[1].toNumber();
@@ -69,6 +68,16 @@ class CitadelDataLoader {
           citadelFleetTrainingCount[1].toNumber(),
           citadelFleetTrainingCount[2].toNumber(),
           citadel.id
+        ]);
+
+        let resultsRaidUpdt = await this.pool.query(queries.UPDATE_ACTIVE_RAID, [
+          citadel.id,
+          raid[0].toNumber(),
+          raid[1].toNumber(),
+          raid[2].toNumber(),
+          raid[3].toNumber(),
+          raid[4].toNumber(),
+          raid[5].toNumber()
         ]);
   
         await new Promise(resolve => setTimeout(resolve, 1000));

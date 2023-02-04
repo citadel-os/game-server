@@ -5,6 +5,7 @@ const logger = require("morgan");
 const Pool = require('pg').Pool;
 const citadelRoute = require("./routes/citadel");
 const gridRoute = require("./routes/grid");
+const raidRoute = require("./routes/raid");
 require('dotenv').config();
 
 // env variables
@@ -36,6 +37,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/v1/citadel", citadelRoute);
 app.use("/api/v1/grid", gridRoute);
+app.use("/api/v1/raid", raidRoute);
 
 
 app.use((req, res, next) => {

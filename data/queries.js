@@ -74,9 +74,23 @@ queries = {
         , c.id as citadelId, c.isOnline, c.walletAddress, c.factionId
         FROM grid g LEFT JOIN citadel c ON (g.id = c.gridId)
         WHERE g.id = $1
+    `,
+    UPDATE_ACTIVE_RAID: `
+        UPDATE activeRaids
+        SET toCitadel = $2,
+        sifGattaca = $3,
+        mhrudvogThrot = $4,
+        drebentraakht = $5,
+        pilotCount = $6, 
+        timeRaidHits = $7
+        WHERE fromCitadel = $1
+    `,
+    GET_ALL_RAIDS: `
+        SELECT fromCitadel, toCitadel, sifGattaca, mhrudvogThrot, drebentraakht
+        , pilotCount, timeRaidHits
+        FROM activeRaids
+        ORDER BY fromCitadel
     `
-
-
 };
 
 module.exports = queries;
