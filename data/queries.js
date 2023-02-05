@@ -89,6 +89,7 @@ queries = {
         SELECT fromCitadel, toCitadel, sifGattaca, mhrudvogThrot, drebentraakht
         , pilotCount, timeRaidHits
         FROM activeRaids
+        WHERE toCitadel != 0
         ORDER BY fromCitadel
     `
 };

@@ -8,7 +8,9 @@ class RaidController {
     let allRaids = [];
     let results = await pool.query(queries.GET_ALL_RAIDS);
     for(let i=0; i < results.rows.length; i++) {
+      console.log(results.rows[i]);
       let raid = map.mapRaid(results.rows[i]);
+
       allRaids.push(raid);
     }
     

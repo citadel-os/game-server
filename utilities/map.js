@@ -51,13 +51,13 @@ function mapGrid(dbGrid) {
 
 function mapRaid(dbRaid) {
     const raid = {
-        fromCitadel: dbRaid.fromCitadel,
-        toCitadel: dbRaid.toCitadel,
-        sifGattaca: dbRaid.sifGattaca, 
-        mhrudvogThrot: dbRaid.mhrudvogThrot, 
+        fromCitadel: dbRaid.fromcitadel,
+        toCitadel: dbRaid.tocitadel,
+        sifGattaca: dbRaid.sifgattaca, 
+        mhrudvogThrot: dbRaid.mhrudvogthrot, 
         drebentraakht: dbRaid.drebentraakht,
-        pilotCount: dbRaid.pilotCount, 
-        timeRaidHits: dbRaid.timeRaidHits
+        pilotCount: dbRaid.pilotcount, 
+        timeRaidHits: dbRaid.timeraidhits
     };
     return raid;
 }
