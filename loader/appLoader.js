@@ -22,9 +22,9 @@ async function loadCitadel() {
 }
 
 function main() {
-    loadCitadel().then(result => {
-      console.log("citadel data loader done");
-    });
-  }
+  loadCitadel().then(result => {
+    console.log("citadel data loader done");
+  });
+}
   
-  main();
+main();

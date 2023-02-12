@@ -15,12 +15,13 @@ class CitadelDataLoader {
   async loadData() {
     let runForever = true;
     while (runForever) {
-      for(let i=0; i<1024; i++) {
+      for(let i=990; i<1024; i++) {
         try {
           let citadelStats = await this.gameV1.getCitadel(i);
           let citadelMining = await this.gameV1.getCitadelMining(i);
           let citadelFleetCount = await this.gameV1.getCitadelFleetCount(i);
           let citadelFleetTrainingCount = await this.gameV1.getCitadelFleetCountTraining(i);
+          let citadelPilots = await this.gameV1.getCitadelPilot(i);
           let raid = await this.gameV1.getRaid(i);
     
           let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR)
@@ -80,6 +81,19 @@ class CitadelDataLoader {
             raid[4].toNumber(),
             raid[5].toNumber()
           ]);
+
+          let resultsDeleteCitadelPilot = await this.pool.query(queries.DELETE_CITADEL_PILOT, [
+            i
+          ]);
+
+          for(let j = 0; j< citadelPilots.length; j++) {
+            let pilotId = citadelPilots[j].toNumber()
+            let resultsPilotInsert = await this.pool.query(queries.INSERT_CITADEL_PILOT, [
+              i,
+              pilotId
+            ]);
+          }
+
         } catch(err) {
           console.log(err);
         }

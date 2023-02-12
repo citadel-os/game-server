@@ -64,3 +64,17 @@ CREATE TABLE activeRaids (
 
 ALTER TABLE citadel
 ADD COLUMN pilotCount INTEGER;
+
+CREATE TABLE raidReports (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    fromCitadel BIGINT,
+    toCitadel BIGINT,
+    timeRaidHit BIGINT,
+    offensiveCarryCapacity BIGINT,
+    drakmaRaided BIGINT,
+    blocknumber BIGINT
+);
+
+ALTER TABLE raidReports
+    ADD CONSTRAINT raid_report_block_from_citadel
+    UNIQUE (fromCitadel, blocknumber);

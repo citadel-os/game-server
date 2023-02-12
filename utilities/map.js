@@ -31,6 +31,10 @@ function mapCitadel(dbCitadel) {
         level: 0,
         fleetPoints: dbCitadel.fleetpoints
     };
+    if(dbCitadel.pilotids[0] != null) {
+        citadel.pilots = dbCitadel.pilotids;
+    }
+
     return citadel;
 }
 
@@ -62,8 +66,21 @@ function mapRaid(dbRaid) {
     return raid;
 }
 
+function mapRaidReport(dbReport) {
+    const report = {
+        fromCitadel: dbReport.fromcitadel,
+        toCitadel: dbReport.tocitadel,
+        timeRaidHit: dbReport.timeraidhits,
+        offensiveCarryCapacity: dbReport.offensivecarrycapacity,
+        drakmaRaided: dbReport.drakmaraided,
+        blocknumber: dbReport.blocknumber
+    };
+    return report;
+}
+
 module.exports = {
     mapCitadel: mapCitadel,
     mapGrid: mapGrid,
-    mapRaid: mapRaid
+    mapRaid: mapRaid,
+    mapRaidReport: mapRaidReport
 };

@@ -39,7 +39,6 @@ app.use("/api/v1/citadel", citadelRoute);
 app.use("/api/v1/grid", gridRoute);
 app.use("/api/v1/raid", raidRoute);
 
-
 app.use((req, res, next) => {
   next(createError(404));
 });

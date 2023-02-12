@@ -29,7 +29,7 @@ class CitadelController {
   }
 
   async getCitadel(req, res) {
-    console.log(req.params.id);
+
     const pool = req.app.locals.pool;
     let allCitadel = [];
     let results = await pool.query(queries.GET_CITADEL, [
