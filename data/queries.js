@@ -2,8 +2,8 @@
 queries = {
     GET_ALL_CITADEL: `
         SELECT c.id, c.walletAddress, c.gridId, c.timeOfLastClaim, c.timeLit, c.timeLastRaided
-        , c.unclaimedDrakma, c.isOnline, c.factionId, c.engine, c.weaponSystem, c.shield
-        , c.fleetPoints, c.level, c.pilotCount
+        , c.unclaimedDrakma, c.factionId, c.engine, c.weaponSystem, c.shield
+        , c.level, c.pilotCount
         , g.isLit, g.multiple
         , f.sifGattaca, f.mhrudvogThrot, f.drebentraakht
         , f.sifGattacaTraining, f.mhrudvogThrotTraining, f.drebentraakhtTraining
@@ -12,8 +12,8 @@ queries = {
         LEFT JOIN citadelFleet f ON (c.id = f.citadelId)
         LEFT JOIN citadelPilot p on (c.id = p.citadelId)
         GROUP BY c.id, c.walletAddress, c.gridId, c.timeOfLastClaim, c.timeLit, c.timeLastRaided
-        , c.unclaimedDrakma, c.isOnline, c.factionId, c.engine, c.weaponSystem, c.shield
-        , c.fleetPoints, c.level, c.pilotCount
+        , c.unclaimedDrakma, c.factionId, c.engine, c.weaponSystem, c.shield
+        , c.level, c.pilotCount
         , g.isLit, g.multiple
         , f.sifGattaca, f.mhrudvogThrot, f.drebentraakht
         , f.sifGattacaTraining, f.mhrudvogThrotTraining, f.drebentraakhtTraining
@@ -21,8 +21,8 @@ queries = {
     `,
     GET_LIT_CITADEL: `
         SELECT c.id, c.walletAddress, c.gridId, c.timeOfLastClaim, c.timeLit, c.timeLastRaided
-        , c.unclaimedDrakma, c.isOnline, c.factionId, c.engine, c.weaponSystem, c.shield
-        , c.fleetPoints, c.level, c.pilotCount
+        , c.unclaimedDrakma, c.factionId, c.engine, c.weaponSystem, c.shield
+        , c.level, c.pilotCount
         , g.isLit, g.multiple
         , f.sifGattaca, f.mhrudvogThrot, f.drebentraakht
         , f.sifGattacaTraining, f.mhrudvogThrotTraining, f.drebentraakhtTraining
@@ -32,8 +32,8 @@ queries = {
         LEFT JOIN citadelPilot p on (c.id = p.citadelId)
         WHERE g.isLit = true
         GROUP BY c.id, c.walletAddress, c.gridId, c.timeOfLastClaim, c.timeLit, c.timeLastRaided
-        , c.unclaimedDrakma, c.isOnline, c.factionId, c.engine, c.weaponSystem, c.shield
-        , c.fleetPoints, c.level, c.pilotCount
+        , c.unclaimedDrakma, c.factionId, c.engine, c.weaponSystem, c.shield
+        , c.level, c.pilotCount
         , g.isLit, g.multiple
         , f.sifGattaca, f.mhrudvogThrot, f.drebentraakht
         , f.sifGattacaTraining, f.mhrudvogThrotTraining, f.drebentraakhtTraining
@@ -41,8 +41,8 @@ queries = {
     `,
     GET_CITADEL: `
         SELECT c.id, c.walletAddress, c.gridId, c.timeOfLastClaim, c.timeLit, c.timeLastRaided
-        , c.unclaimedDrakma, c.isOnline, c.factionId, c.engine, c.weaponSystem, c.shield
-        , c.fleetPoints, c.level, c.pilotCount
+        , c.unclaimedDrakma, c.factionId, c.engine, c.weaponSystem, c.shield
+        , c.level, c.pilotCount
         , g.isLit, g.multiple
         , f.sifGattaca, f.mhrudvogThrot, f.drebentraakht
         , f.sifGattacaTraining, f.mhrudvogThrotTraining, f.drebentraakhtTraining
@@ -52,8 +52,8 @@ queries = {
         LEFT JOIN citadelPilot p on (c.id = p.citadelId)
         WHERE c.id = $1
         GROUP BY c.id, c.walletAddress, c.gridId, c.timeOfLastClaim, c.timeLit, c.timeLastRaided
-        , c.unclaimedDrakma, c.isOnline, c.factionId, c.engine, c.weaponSystem, c.shield
-        , c.fleetPoints, c.level, c.pilotCount
+        , c.unclaimedDrakma, c.factionId, c.engine, c.weaponSystem, c.shield
+        , c.level, c.pilotCount
         , g.isLit, g.multiple
         , f.sifGattaca, f.mhrudvogThrot, f.drebentraakht
         , f.sifGattacaTraining, f.mhrudvogThrotTraining, f.drebentraakhtTraining
@@ -63,14 +63,12 @@ queries = {
         SET walletAddress = $1,
         gridId = $2,
         factionId = $3,
-        fleetPoints = $4,
-        timeLit = $5,
-        timeOfLastClaim = $6,
-        timeLastRaided = $7,
-        unclaimedDrakma = $8,
-        isOnline = $9,
-        pilotCount = $10
-        WHERE id = $11
+        timeLit = $4,
+        timeOfLastClaim = $5,
+        timeLastRaided = $6,
+        unclaimedDrakma = $7,
+        pilotCount = $8
+        WHERE id = $9
     `,
     UPDATE_GRID: `
         UPDATE grid
@@ -89,13 +87,13 @@ queries = {
     `,
     GET_ALL_GRID: `
         SELECT g.id, g.multiple, g.isLit
-        , c.id as citadelId, c.isOnline, c.walletAddress, c.factionId
+        , c.id as citadelId, c.walletAddress, c.factionId
         FROM grid g LEFT JOIN citadel c ON (g.id = c.gridId)
         order by g.id ASC
     `,
     GET_GRID: `
         SELECT g.id, g.multiple, g.isLit
-        , c.id as citadelId, c.isOnline, c.walletAddress, c.factionId
+        , c.id as citadelId, c.walletAddress, c.factionId
         FROM grid g LEFT JOIN citadel c ON (g.id = c.gridId)
         WHERE g.id = $1
     `,
@@ -125,21 +123,32 @@ queries = {
         VALUES($1, $2)
     `,
     UPSERT_RAID_REPORT: `
-    INSERT INTO raidReports(fromCitadel, toCitadel, timeRaidHit, offensiveCarryCapacity, drakmaRaided, blocknumber)
-    values($1, $2, $3, $4, $5, $6)
+    INSERT INTO raidReports(fromCitadel, toCitadel, timeRaidHit
+        , offensiveCarryCapacity, drakmaRaided
+        , offensiveSifGattacaDestroyed, offensiveMhrudvogThrotDestroyed, offensiveDrebentraakhtDestroyed
+        , defensiveSifGattacaDestroyed, defensiveMhrudvogThrotDestroyed, defensiveDrebentraakhtDestroyed
+        , blocknumber
+    )
+    values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
     ON CONFLICT(blocknumber, fromCitadel)
     DO NOTHING
     `,
     GET_RAID_REPORT_FROM: `
-    SELECT fromCitadel, toCitadel, timeRaidHit, offensiveCarryCapacity
-    , drakmaRaided, blocknumber
+    SELECT fromCitadel, toCitadel, timeRaidHit
+    , offensiveCarryCapacity, drakmaRaided
+    , offensiveSifGattacaDestroyed, offensiveMhrudvogThrotDestroyed, offensiveDrebentraakhtDestroyed
+    , defensiveSifGattacaDestroyed, defensiveMhrudvogThrotDestroyed, defensiveDrebentraakhtDestroyed
+    , blocknumber
     FROM raidReports
     WHERE fromCitadel = $1
     ORDER BY blocknumber desc
     `,
     GET_RAID_REPORT_TO: `
-    SELECT fromCitadel, toCitadel, timeRaidHit, offensiveCarryCapacity
-    , drakmaRaided, blocknumber
+    SELECT fromCitadel, toCitadel, timeRaidHit
+    , offensiveCarryCapacity, drakmaRaided
+    , offensiveSifGattacaDestroyed, offensiveMhrudvogThrotDestroyed, offensiveDrebentraakhtDestroyed
+    , defensiveSifGattacaDestroyed, defensiveMhrudvogThrotDestroyed, defensiveDrebentraakhtDestroyed
+    , blocknumber
     FROM raidReports
     WHERE toCitadel = $1
     ORDER BY blocknumber desc

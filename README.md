@@ -26,12 +26,10 @@ Runs on http://localhost:8000/
         timeLit: int
         timeLastRaided: int
         unclaimedDrakma: int
-        isOnline: bool
         factionId: int
         engine: int
         weaponSystem: int
         shield: int
-        fleetPoints: int
         level: int
         pilotCount: int
 
@@ -116,13 +114,11 @@ Runs on http://localhost:8000/
         timeLit: int,
         timeLastRaided: int,
         unclaimedDrakma: int,
-        isOnline: bool,
         faction: string,
         weaponSystem: string,
         engine: string,
         shield: string,
-        level: int,
-        fleetPoints: int
+        level: int
     }
 
     grid: {
@@ -131,7 +127,6 @@ Runs on http://localhost:8000/
             multiple: int,
             citadel: {
                 citadelId: int,
-                isOnline: bool,
                 walletAddress: string,
                 faction: string 
             }

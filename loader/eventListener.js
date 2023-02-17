@@ -53,14 +53,19 @@ function main() {
     });
 }
 
-
 function decodeLogData(data) {
     const typesArray = [
         {type: 'uint256', name: 'fromCitadelId'}, 
         {type: 'uint256', name: 'toCitadelId'},
         {type: 'uint256', name: 'timeRaidHit'},
         {type: 'uint256', name: 'offensiveCarryCapacity'},
-        {type: 'uint256', name: 'drakmaRaided'}
+        {type: 'uint256', name: 'drakmaRaided'},
+        {type: 'uint256', name: 'offensiveSifGattacaDestroyed'},
+        {type: 'uint256', name: 'offensiveMhrudvogThrotDestroyed'},
+        {type: 'uint256', name: 'offensiveDrebentraakhtDestroyed'},
+        {type: 'uint256', name: 'defensiveSifGattacaDestroyed'},
+        {type: 'uint256', name: 'defensiveMhrudvogThrotDestroyed'},
+        {type: 'uint256', name: 'defensiveDrebentraakhtDestroyed'}
     ];
     let decodedParameters = web3.eth.abi.decodeParameters(typesArray, data);
     return decodedParameters;

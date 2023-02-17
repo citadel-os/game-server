@@ -4,9 +4,10 @@ class CitadelDataLoader {
 
   ETH_DIVISOR = 1000000000000000000;
   
-  constructor(pool, gameV1) {
+  constructor(pool, gameV1, fleetV1) {
     this.pool = pool;
     this.gameV1 = gameV1;
+    this.fleetV1 = fleetV1;
     this.citadel = [];
     this.grid = [];
     this.pilot = [];
@@ -20,7 +21,7 @@ class CitadelDataLoader {
           let citadelStats = await this.gameV1.getCitadel(i);
           let citadelMining = await this.gameV1.getCitadelMining(i);
           let citadelFleetCount = await this.gameV1.getCitadelFleetCount(i);
-          let citadelFleetTrainingCount = await this.gameV1.getCitadelFleetCountTraining(i);
+          let citadelFleetTrainingCount = await this.fleetV1.getFleetInTraining(i);
           let citadelPilots = await this.gameV1.getCitadelPilot(i);
           let raid = await this.gameV1.getRaid(i);
     
@@ -33,12 +34,10 @@ class CitadelDataLoader {
             factionId: citadelStats[2],
             pilotCount: citadelStats[3].toNumber(),
             isLit: citadelStats[4],
-            fleetPoints: citadelStats[5].toNumber(),
             timeLit: citadelMining[0].toNumber(),
             timeOfLastClaim: citadelMining[1].toNumber(),
             timeLastRaided: citadelMining[2].toNumber(),
-            unclaimedDrakma: unclaimedDrakma,
-            isOnline: citadelMining[4]
+            unclaimedDrakma: unclaimedDrakma
           }
     
           this.citadel.push(citadel);
@@ -46,13 +45,11 @@ class CitadelDataLoader {
           let resultsCitadelUpdt = await this.pool.query(queries.UPDATE_CITADEL, [
             citadel.walletAddress, 
             citadel.gridId, 
-            citadel.factionId, 
-            citadel.fleetPoints, 
+            citadel.factionId,
             citadel.timeLit,
             citadel.timeOfLastClaim,
             citadel.timeLastRaided,
             citadel.unclaimedDrakma,
-            citadel.isOnline,
             citadel.pilotCount,
             citadel.id
           ]);

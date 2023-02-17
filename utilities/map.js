@@ -23,13 +23,11 @@ function mapCitadel(dbCitadel) {
         timeLit: dbCitadel.timelit,
         timeLastRaided: dbCitadel.timelastraided,
         unclaimedDrakma: dbCitadel.unclaimeddrakma,
-        isOnline: dbCitadel.isonline,
         faction: constants.FACTION[dbCitadel.factionid],
         weaponSystem: constants.WEAPON_SYSTEM[dbCitadel.weaponsystem],
         engine: constants.ENGINE[dbCitadel.engine],
         shield: constants.SHIELD[dbCitadel.shield],
-        level: 0,
-        fleetPoints: dbCitadel.fleetpoints
+        level: 0
     };
     if(dbCitadel.pilotids[0] != null) {
         citadel.pilots = dbCitadel.pilotids;
@@ -45,7 +43,6 @@ function mapGrid(dbGrid) {
         multiple: dbGrid.multiple,
         citadel: {
             citadelId: dbGrid.citadelid,
-            isOnline: dbGrid.isonline,
             walletAddress: dbGrid.walletaddress,
             faction: constants.FACTION[dbGrid.factionid]
         }
@@ -73,7 +70,13 @@ function mapRaidReport(dbReport) {
         timeRaidHit: dbReport.timeraidhits,
         offensiveCarryCapacity: dbReport.offensivecarrycapacity,
         drakmaRaided: dbReport.drakmaraided,
-        blocknumber: dbReport.blocknumber
+        blocknumber: dbReport.blocknumber,
+        offensiveSifGattacaDestroyed: dbReport.offensivesifgattacadestroyed, 
+        offensiveMhrudvogThrotDestroyed: dbReport.offensivemhrudvogthrotdestroyed, 
+        offensiveDrebentraakhtDestroyed: dbReport.offensivedrebentraakhtdestroyed, 
+        defensiveSifGattacaDestroyed: dbReport.defensivesifgattacadestroyed, 
+        defensiveMhrudvogThrotDestroyed: dbReport.defensivemhrudvogthrotdestroyed, 
+        defensiveDrebentraakhtDestroyed: dbReport.defensivedrebentraakhtdestroyed
     };
     return report;
 }

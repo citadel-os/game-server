@@ -78,3 +78,15 @@ CREATE TABLE raidReports (
 ALTER TABLE raidReports
     ADD CONSTRAINT raid_report_block_from_citadel
     UNIQUE (fromCitadel, blocknumber);
+
+ALTER TABLE raidReports
+ADD COLUMN offensiveSifGattacaDestroyed INTEGER,
+ADD COLUMN offensiveMhrudvogThrotDestroyed INTEGER,
+ADD COLUMN offensiveDrebentraakhtDestroyed INTEGER,
+ADD COLUMN defensiveSifGattacaDestroyed INTEGER,
+ADD COLUMN defensiveMhrudvogThrotDestroyed INTEGER,
+ADD COLUMN defensiveDrebentraakhtDestroyed INTEGER;
+
+ALTER TABLE citadel
+DROP COLUMN isOnline,
+DROP COLUMN fleetPoints;
