@@ -16,7 +16,7 @@ class CitadelDataLoader {
   async loadData() {
     let runForever = true;
     while (runForever) {
-      for(let i=990; i<1024; i++) {
+      for(let i=4; i<1024; i++) {
         try {
           let citadelStats = await this.gameV1.getCitadel(i);
           let citadelMining = await this.gameV1.getCitadelMining(i);

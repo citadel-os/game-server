@@ -77,8 +77,14 @@ async function writeReport(report, blocknumber) {
         report.fromCitadelId,
         report.toCitadelId,
         report.timeRaidHit,
-        web3.utils.fromWei(report.offensiveCarryCapacity.toString(), 'ether'),
-        web3.utils.fromWei(report.drakmaRaided.toString(), 'ether'),
+        parseInt(web3.utils.fromWei(report.offensiveCarryCapacity.toString(), 'ether')),
+        parseInt(web3.utils.fromWei(report.drakmaRaided.toString(), 'ether')),
+        report.offensiveSifGattacaDestroyed, 
+        report.offensiveMhrudvogThrotDestroyed, 
+        report.offensiveDrebentraakhtDestroyed, 
+        report.defensiveSifGattacaDestroyed, 
+        report.defensiveMhrudvogThrotDestroyed, 
+        report.defensiveDrebentraakhtDestroyed,
         blocknumber
       ]);
 }
