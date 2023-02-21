@@ -8,15 +8,12 @@ class CitadelDataLoader {
     this.pool = pool;
     this.gameV1 = gameV1;
     this.fleetV1 = fleetV1;
-    this.citadel = [];
-    this.grid = [];
-    this.pilot = [];
   }
 
   async loadData() {
     let runForever = true;
     while (runForever) {
-      for(let i=4; i<1024; i++) {
+      for(let i=0; i<1024; i++) {
         try {
           let citadelStats = await this.gameV1.getCitadel(i);
           let citadelMining = await this.gameV1.getCitadelMining(i);
@@ -40,9 +37,7 @@ class CitadelDataLoader {
             unclaimedDrakma: unclaimedDrakma
           }
     
-          this.citadel.push(citadel);
-    
-          let resultsCitadelUpdt = await this.pool.query(queries.UPDATE_CITADEL, [
+          await this.pool.query(queries.UPDATE_CITADEL, [
             citadel.walletAddress, 
             citadel.gridId, 
             citadel.factionId,
@@ -54,12 +49,12 @@ class CitadelDataLoader {
             citadel.id
           ]);
     
-          let resultsGridUpdt = await this.pool.query(queries.UPDATE_GRID, [
+          await this.pool.query(queries.UPDATE_GRID, [
             citadel.isLit, 
             citadel.gridId
           ]);
     
-          let resultsCitadelFleetUpdt = await this.pool.query(queries.UPDATE_FLEET, [
+          await this.pool.query(queries.UPDATE_FLEET, [
             citadelFleetCount[0].toNumber(),
             citadelFleetCount[1].toNumber(),
             citadelFleetCount[2].toNumber(),
@@ -69,7 +64,7 @@ class CitadelDataLoader {
             citadel.id
           ]);
   
-          let resultsRaidUpdt = await this.pool.query(queries.UPDATE_ACTIVE_RAID, [
+          await this.pool.query(queries.UPDATE_ACTIVE_RAID, [
             citadel.id,
             raid[0].toNumber(),
             raid[1].toNumber(),
@@ -79,13 +74,13 @@ class CitadelDataLoader {
             raid[5].toNumber()
           ]);
 
-          let resultsDeleteCitadelPilot = await this.pool.query(queries.DELETE_CITADEL_PILOT, [
+          await this.pool.query(queries.DELETE_CITADEL_PILOT, [
             i
           ]);
 
           for(let j = 0; j< citadelPilots.length; j++) {
             let pilotId = citadelPilots[j].toNumber()
-            let resultsPilotInsert = await this.pool.query(queries.INSERT_CITADEL_PILOT, [
+            await this.pool.query(queries.INSERT_CITADEL_PILOT, [
               i,
               pilotId
             ]);

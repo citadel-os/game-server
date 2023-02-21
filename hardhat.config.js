@@ -14,20 +14,6 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
-    ropsten: {
-      url: API_URL,
-      accounts: [`0x${PRIVATE_KEY}`],
-      gas: "auto",
-      gasMultiplier: 2,
-    },
-    rinkeby: {
-      url: API_URL,
-      accounts: [`0x${PRIVATE_KEY}`],
-      gas: 2100000, 
-      gasPrice: 8000000000
-      //gas: "auto",
-      //gasMultiplier: 2,
-    },
     localhost: {
       url: API_URL,
       accounts: "remote",

@@ -35,7 +35,8 @@ const constants = {
         "THE SANCTION",
         "THE NETWORK STATE",
         "UBOJ"
-    ]
+    ],
+    ETH_DIVISOR: 1000000000000000000
 };
 
 module.exports = constants;
