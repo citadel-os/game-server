@@ -75,6 +75,11 @@ queries = {
         SET isLit = $1
         WHERE id = $2
     `,
+    DIM_GRID: `
+        UPDATE grid
+        SET isLit = false
+        WHERE NOT (id = ANY($1::int[]))
+    `,
     UPDATE_FLEET: `
         UPDATE citadelFleet
         SET sifGattaca = $1,

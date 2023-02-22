@@ -12,6 +12,7 @@ class CitadelDataLoader {
 
   async loadData() {
     let runForever = true;
+    let litGrid = [];
     while (runForever) {
       for(let i=0; i<1024; i++) {
         try {
@@ -49,11 +50,14 @@ class CitadelDataLoader {
             citadel.id
           ]);
     
-          await this.pool.query(queries.UPDATE_GRID, [
-            citadel.isLit, 
-            citadel.gridId
-          ]);
-    
+          if(citadel.gridId != null) {
+            await this.pool.query(queries.UPDATE_GRID, [
+              citadel.isLit, 
+              citadel.gridId
+            ]);
+            litGrid.push(citadel.gridId);
+          }
+
           await this.pool.query(queries.UPDATE_FLEET, [
             citadelFleetCount[0].toNumber(),
             citadelFleetCount[1].toNumber(),
@@ -94,6 +98,12 @@ class CitadelDataLoader {
         await new Promise(resolve => setTimeout(resolve, 1000));
         console.log("citadel: " + i + " updated");
       }
+
+      console.log("dimming grid");
+      var res = await this.pool.query(queries.DIM_GRID, [
+        litGrid
+      ]);
+      console.log(res);
 
       console.log("done loading citadel, waiting for next run");
       await new Promise(resolve => setTimeout(resolve, 5000));
