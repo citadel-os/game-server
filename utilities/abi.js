@@ -2787,902 +2787,902 @@ const abiSovereignCollective = [
   ];
   
 const abiCitadelGameV1 = [
-    {
-      "inputs": [
-            {
-              "internalType": "contract IERC721",
-              "name": "_citadelCollection",
-              "type": "address"
-            },
-            {
-              "internalType": "contract IERC721",
-              "name": "_pilotCollection",
-              "type": "address"
-            },
-            {
-              "internalType": "contract IERC20",
-              "name": "_drakma",
-              "type": "address"
-            },
-            {
-              "internalType": "contract ICOMBATENGINE",
-              "name": "_combatEngine",
-              "type": "address"
-            },
-            {
-              "internalType": "contract IFLEETENGINE",
-              "name": "_fleetEngine",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "fromCitadelId",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "toCitadelId",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "timeRaidHit",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "offensiveCarryCapacity",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "drakmaRaided",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "offensiveSifGattacaDestroyed",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "offensiveMhrudvogThrotDestroyed",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "offensiveDrebentraakhtDestroyed",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "defensiveSifGattacaDestroyed",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "defensiveMhrudvogThrotDestroyed",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "defensiveDrebentraakhtDestroyed",
-              "type": "uint256"
-            }
-          ],
-          "name": "DispatchRaid",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "citadelCollection",
-          "outputs": [
-            {
-              "internalType": "contract IERC721",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "claim",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "combatEngine",
-          "outputs": [
-            {
-              "internalType": "contract ICOMBATENGINE",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "dimGrid",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "drakma",
-          "outputs": [
-            {
-              "internalType": "contract IERC20",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "escapeHatch",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "fleetEngine",
-          "outputs": [
-            {
-              "internalType": "contract IFLEETENGINE",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "getCitadel",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint8",
-              "name": "",
-              "type": "uint8"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "getCitadelFleetCount",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "getCitadelMining",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "getCitadelPilot",
-          "outputs": [
-            {
-              "internalType": "uint256[]",
-              "name": "",
-              "type": "uint256[]"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_gridId",
-              "type": "uint256"
-            }
-          ],
-          "name": "getGrid",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_fromCitadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "getRaid",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "lastTimeRewardApplicable",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256[]",
-              "name": "_pilotIds",
-              "type": "uint256[]"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_gridId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint8",
-              "name": "_factionId",
-              "type": "uint8"
-            }
-          ],
-          "name": "liteGrid",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "owner",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "pilotCollection",
-          "outputs": [
-            {
-              "internalType": "contract IERC721",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "renounceOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_fromCitadel",
-              "type": "uint256"
-            }
-          ],
-          "name": "resolveRaid",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_fromCitadel",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_toCitadel",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256[]",
-              "name": "_pilot",
-              "type": "uint256[]"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_sifGattaca",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_mhrudvogThrot",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_drebentraakht",
-              "type": "uint256"
-            }
-          ],
-          "name": "sendRaid",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "transferOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_periodFinish",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint8",
-              "name": "_subgridDistortion",
-              "type": "uint8"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_gridTraversalTime",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "_escapeHatchOn",
-              "type": "bool"
-            }
-          ],
-          "name": "updateGameParams",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "withdrawDrakma",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-  ];
+  {
+    "inputs": [
+      {
+        "internalType": "contract IERC721",
+        "name": "_citadelCollection",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IERC721",
+        "name": "_pilotCollection",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IERC20",
+        "name": "_drakma",
+        "type": "address"
+      },
+      {
+        "internalType": "contract ICOMBATENGINE",
+        "name": "_combatEngine",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IFLEETENGINE",
+        "name": "_fleetEngine",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "fromCitadelId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "toCitadelId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timeRaidHit",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "offensiveCarryCapacity",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "drakmaRaided",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "offensiveSifGattacaDestroyed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "offensiveMhrudvogThrotDestroyed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "offensiveDrebentraakhtDestroyed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "defensiveSifGattacaDestroyed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "defensiveMhrudvogThrotDestroyed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "defensiveDrebentraakhtDestroyed",
+        "type": "uint256"
+      }
+    ],
+    "name": "DispatchRaid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "citadelCollection",
+    "outputs": [
+      {
+        "internalType": "contract IERC721",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "claim",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "combatEngine",
+    "outputs": [
+      {
+        "internalType": "contract ICOMBATENGINE",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "dimGrid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "drakma",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "escapeHatch",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fleetEngine",
+    "outputs": [
+      {
+        "internalType": "contract IFLEETENGINE",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getCitadel",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getCitadelFleetCount",
+    "outputs": [
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getCitadelMining",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getCitadelPilot",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_gridId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getGrid",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fromCitadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getRaid",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "lastTimeRewardApplicable",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_pilotIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_gridId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_factionId",
+        "type": "uint8"
+      }
+    ],
+    "name": "liteGrid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pilotCollection",
+    "outputs": [
+      {
+        "internalType": "contract IERC721",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fromCitadel",
+        "type": "uint256"
+      }
+    ],
+    "name": "resolveRaid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fromCitadel",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_toCitadel",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_pilot",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_sifGattaca",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_mhrudvogThrot",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_drebentraakht",
+        "type": "uint256"
+      }
+    ],
+    "name": "sendRaid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_periodFinish",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_subgridDistortion",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_gridTraversalTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "_escapeHatchOn",
+        "type": "bool"
+      }
+    ],
+    "name": "updateGameParams",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "withdrawDrakma",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+];
   
 const abiCitadelFleetV1 = [
-    {
-          "inputs": [
-            {
-              "internalType": "contract IERC20",
-              "name": "_drakma",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "calculateTrainedFleet",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_sifGattaca",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_mhrudvogThrot",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_drebentraakht",
-              "type": "uint256"
-            }
-          ],
-          "name": "calculateTrainingCost",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "drakma",
-          "outputs": [
-            {
-              "internalType": "contract IERC20",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "getFleetInTraining",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "getTrainedFleet",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "lastTimeRewardApplicable",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "owner",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "renounceOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            }
-          ],
-          "name": "resolveTraining",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_citadelId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_sifGattaca",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_mhrudvogThrot",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_drebentraakht",
-              "type": "uint256"
-            }
-          ],
-          "name": "trainFleet",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "transferOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_sifGattacaPrice",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_mhrudvogThrotPrice",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_drebentraakhtPrice",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_sifGattacaTrainingTime",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_mhrudvogThrotTrainingTime",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "_drebentraakhtTrainingTime",
-              "type": "uint256"
-            }
-          ],
-          "name": "updateFleetParams",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_periodFinish",
-              "type": "uint256"
-            }
-          ],
-          "name": "updateGameParams",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
-          "name": "withdrawDrakma",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
-  ];
+  {
+    "inputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "_drakma",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "calculateTrainedFleet",
+    "outputs": [
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "int256",
+        "name": "_sifGattaca",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_mhrudvogThrot",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_drebentraakht",
+        "type": "int256"
+      }
+    ],
+    "name": "calculateTrainingCost",
+    "outputs": [
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "drakma",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getFleetInTraining",
+    "outputs": [
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTrainedFleet",
+    "outputs": [
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "lastTimeRewardApplicable",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "resolveTraining",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_sifGattaca",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_mhrudvogThrot",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_drebentraakht",
+        "type": "int256"
+      }
+    ],
+    "name": "trainFleet",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "int256",
+        "name": "_sifGattacaPrice",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_mhrudvogThrotPrice",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_drebentraakhtPrice",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_sifGattacaTrainingTime",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_mhrudvogThrotTrainingTime",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "_drebentraakhtTrainingTime",
+        "type": "int256"
+      }
+    ],
+    "name": "updateFleetParams",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_periodFinish",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateGameParams",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "withdrawDrakma",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+];
 
 module.exports = {
     abiCitadelFleetV1: abiCitadelFleetV1,
