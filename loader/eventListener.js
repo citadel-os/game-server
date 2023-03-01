@@ -33,7 +33,7 @@ var options = {
     topics: [
         RAID_TOPIC
     ],
-    fromBlock: 8470000
+    fromBlock: 8550000
 };
 
 function main() {

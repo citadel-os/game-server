@@ -135,6 +135,8 @@ class CitadelController {
         pilotId
       ]);
     }
+
+    await pool.query(queries.DIM_GRID, []);
     
     res.status(200).json({"ok": true});
   }

@@ -76,9 +76,14 @@ queries = {
         WHERE id = $2
     `,
     DIM_GRID: `
-        UPDATE grid
-        SET isLit = false
-        WHERE NOT (id = ANY($1::int[]))
+        update grid
+        set isLit = false
+        where id not in (
+            select gridId 
+            from citadel
+            where gridId is not null
+        )
+        and isLit = true
     `,
     UPDATE_FLEET: `
         UPDATE citadelFleet
