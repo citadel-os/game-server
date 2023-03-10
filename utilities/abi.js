@@ -3030,11 +3030,6 @@ const abiCitadelGameV1 = [
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -3313,6 +3308,39 @@ const abiCitadelGameV1 = [
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "_fromCitadel",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_toCitadel",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_sifGattaca",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_mhrudvogThrot",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_drebentraakht",
+        "type": "uint256"
+      }
+    ],
+    "name": "sendReinforcements",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "newOwner",
         "type": "address"
@@ -3328,16 +3356,6 @@ const abiCitadelGameV1 = [
       {
         "internalType": "uint256",
         "name": "_periodFinish",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint8",
-        "name": "_subgridDistortion",
-        "type": "uint8"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_gridTraversalTime",
         "type": "uint256"
       },
       {
