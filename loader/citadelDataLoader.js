@@ -24,13 +24,14 @@ class CitadelDataLoader {
     
           let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR)
           let gridId = citadelStats[1].toNumber() == 0 ? null : citadelStats[1].toNumber();
+          let isLit = citadelMining[0].toNumber() > 0 ? true : false;
           let citadel = {
             id: i,
             walletAddress: citadelStats[0],
             gridId: gridId,
             factionId: citadelStats[2],
             pilotCount: citadelStats[3].toNumber(),
-            isLit: citadelStats[4],
+            isLit: isLit,
             timeLit: citadelMining[0].toNumber(),
             timeOfLastClaim: citadelMining[1].toNumber(),
             timeLastRaided: citadelMining[2].toNumber(),
