@@ -22,7 +22,8 @@ class CitadelDataLoader {
           let citadelPilots = await this.gameV1.getCitadelPilot(i);
           let raid = await this.gameV1.getRaid(i);
     
-          let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR)
+          let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR);
+          console.log(citadelMining);
           let gridId = citadelStats[1].toNumber() == 0 ? null : citadelStats[1].toNumber();
           let isLit = citadelMining[0].toNumber() > 0 ? true : false;
           let citadel = {
