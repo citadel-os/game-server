@@ -15,7 +15,10 @@ Runs on http://localhost:8000/
 `npx hardhat run loader/appLoader.js --network goerli`
 
 ## from server
-`/scripts/run_loader.sh > /tmp/loader.log 2>&1 &`
+`/scripts/run_loader.sh > /home/max/loader.log 2>&1 &`
+
+## run listener
+`/scripts/event_listener.sh > /home/max/listener.log 2>&1 &`
 
 ## data model
     citadel
