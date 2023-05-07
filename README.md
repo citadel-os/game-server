@@ -20,6 +20,12 @@ Runs on http://localhost:8000/
 ## run listener
 `/scripts/event_listener.sh > /home/max/listener.log 2>&1 &`
 
+## start server
+`forever list`
+`forever stop 0`
+`forever start app.js`
+
+
 ## data model
     citadel
         id: int
