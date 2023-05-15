@@ -14,87 +14,8 @@ class CitadelDataLoader {
     let runForever = true;
     while (runForever) {
       for(let i=0; i<1024; i++) {
-        try {
-          let citadelStats = await this.gameV1.getCitadel(i);
-          let citadelMining = await this.gameV1.getCitadelMining(i);
-          let citadelFleetCount = await this.gameV1.getCitadelFleetCount(i);
-          let citadelFleetTrainingCount = await this.fleetV1.getFleetInTraining(i);
-          let citadelPilots = await this.gameV1.getCitadelPilot(i);
-          let raid = await this.gameV1.getRaid(i);
-    
-          let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR);
-          console.log(citadelMining);
-          let gridId = citadelStats[1].toNumber() == 0 ? null : citadelStats[1].toNumber();
-          let isLit = citadelMining[0].toNumber() > 0 ? true : false;
-          let citadel = {
-            id: i,
-            walletAddress: citadelStats[0],
-            gridId: gridId,
-            factionId: citadelStats[2],
-            pilotCount: citadelStats[3].toNumber(),
-            isLit: isLit,
-            timeLit: citadelMining[0].toNumber(),
-            timeOfLastClaim: citadelMining[1].toNumber(),
-            timeLastRaided: citadelMining[2].toNumber(),
-            unclaimedDrakma: unclaimedDrakma
-          }
-    
-          await this.pool.query(queries.UPDATE_CITADEL, [
-            citadel.walletAddress, 
-            citadel.gridId, 
-            citadel.factionId,
-            citadel.timeLit,
-            citadel.timeOfLastClaim,
-            citadel.timeLastRaided,
-            citadel.unclaimedDrakma,
-            citadel.pilotCount,
-            citadel.id
-          ]);
-    
-          if(citadel.gridId != null) {
-            await this.pool.query(queries.UPDATE_GRID, [
-              citadel.isLit, 
-              citadel.gridId
-            ]);
-          }
+        await this.updateCitadel(i);
 
-          await this.pool.query(queries.UPDATE_FLEET, [
-            citadelFleetCount[0].toNumber(),
-            citadelFleetCount[1].toNumber(),
-            citadelFleetCount[2].toNumber(),
-            citadelFleetTrainingCount[0].toNumber(),
-            citadelFleetTrainingCount[1].toNumber(),
-            citadelFleetTrainingCount[2].toNumber(),
-            citadel.id
-          ]);
-  
-          await this.pool.query(queries.UPDATE_ACTIVE_RAID, [
-            citadel.id,
-            raid[0].toNumber(),
-            raid[1].toNumber(),
-            raid[2].toNumber(),
-            raid[3].toNumber(),
-            raid[4].toNumber(),
-            raid[5].toNumber()
-          ]);
-
-          await this.pool.query(queries.DELETE_CITADEL_PILOT, [
-            i
-          ]);
-
-          for(let j = 0; j< citadelPilots.length; j++) {
-            let pilotId = citadelPilots[j].toNumber()
-            await this.pool.query(queries.INSERT_CITADEL_PILOT, [
-              i,
-              pilotId
-            ]);
-          }
-
-        } catch(err) {
-          console.log(err);
-        }
-
-  
         await new Promise(resolve => setTimeout(resolve, 1000));
         console.log("citadel: " + i + " updated");
       }
@@ -104,7 +25,88 @@ class CitadelDataLoader {
       console.log(res);
 
       console.log("done loading citadel, waiting for next run");
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      await new Promise(resolve => setTimeout(resolve, 7500));
+    }
+  }
+
+  async updateCitadel(citadelId) {
+    try {
+      let citadelStats = await this.gameV1.getCitadel(citadelId);
+      let citadelMining = await this.gameV1.getCitadelMining(citadelId);
+      let citadelFleetCount = await this.gameV1.getCitadelFleetCount(citadelId);
+      let citadelFleetTrainingCount = await this.fleetV1.getFleetInTraining(citadelId);
+      let citadelPilots = await this.gameV1.getCitadelPilot(citadelId);
+      let raid = await this.gameV1.getRaid(citadelId);
+
+      let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR);
+      let gridId = citadelStats[1].toNumber() == 0 ? null : citadelStats[1].toNumber();
+      let isLit = citadelMining[0].toNumber() > 0 ? true : false;
+      let citadel = {
+        id: citadelId,
+        walletAddress: citadelStats[0],
+        gridId: gridId,
+        factionId: citadelStats[2],
+        pilotCount: citadelStats[3].toNumber(),
+        isLit: isLit,
+        timeLit: citadelMining[0].toNumber(),
+        timeOfLastClaim: citadelMining[1].toNumber(),
+        timeLastRaided: citadelMining[2].toNumber(),
+        unclaimedDrakma: unclaimedDrakma
+      }
+
+      await this.pool.query(queries.UPDATE_CITADEL, [
+        citadel.walletAddress, 
+        citadel.gridId, 
+        citadel.factionId,
+        citadel.timeLit,
+        citadel.timeOfLastClaim,
+        citadel.timeLastRaided,
+        citadel.unclaimedDrakma,
+        citadel.pilotCount,
+        citadel.id
+      ]);
+
+      if(citadel.gridId != null) {
+        await this.pool.query(queries.UPDATE_GRID, [
+          citadel.isLit, 
+          citadel.gridId
+        ]);
+      }
+
+      await this.pool.query(queries.UPDATE_FLEET, [
+        citadelFleetCount[0].toNumber(),
+        citadelFleetCount[1].toNumber(),
+        citadelFleetCount[2].toNumber(),
+        citadelFleetTrainingCount[0].toNumber(),
+        citadelFleetTrainingCount[1].toNumber(),
+        citadelFleetTrainingCount[2].toNumber(),
+        citadel.id
+      ]);
+
+      await this.pool.query(queries.UPDATE_ACTIVE_RAID, [
+        citadel.id,
+        raid[0].toNumber(),
+        raid[1].toNumber(),
+        raid[2].toNumber(),
+        raid[3].toNumber(),
+        raid[4].toNumber(),
+        raid[5].toNumber()
+      ]);
+
+      await this.pool.query(queries.DELETE_CITADEL_PILOT, [
+        citadelId
+      ]);
+
+      for(let j = 0; j< citadelPilots.length; j++) {
+        let pilotId = citadelPilots[j].toNumber()
+        await this.pool.query(queries.INSERT_CITADEL_PILOT, [
+          citadelId,
+          pilotId
+        ]);
+      }
+
+    } catch(err) {
+      console.log(err);
     }
   }
 

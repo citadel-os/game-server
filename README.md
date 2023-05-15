@@ -1,5 +1,5 @@
 # game-server
-
+Aggregates data from ethereum events and scripts. 
 
 ## running
 Runs on http://localhost:8000/
@@ -13,6 +13,9 @@ Runs on http://localhost:8000/
 
 ## run data loader
 `npx hardhat run loader/appLoader.js --network goerli`
+
+## run listener
+`npx hardhat run loader/eventListener.js --network goerli`
 
 ## from server
 `/scripts/run_loader.sh > /home/max/loader.log 2>&1 &`
