@@ -13,7 +13,7 @@ class CitadelDataLoader {
   async loadData() {
     let runForever = true;
     while (runForever) {
-      for(let i=0; i<1024; i++) {
+      for(let i=5; i<6; i++) {
         await this.updateCitadel(i);
 
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -33,7 +33,9 @@ class CitadelDataLoader {
     try {
       let citadelStats = await this.gameV1.getCitadel(citadelId);
       let citadelMining = await this.gameV1.getCitadelMining(citadelId);
-      let citadelFleetCount = await this.gameV1.getCitadelFleetCount(citadelId);
+      let citadelFleetCount = await this.fleetV1.getTrainedFleet(citadelId);
+      console.log("citadel fleet count 0")
+      console.log(citadelFleetCount);
       let citadelFleetTrainingCount = await this.fleetV1.getFleetInTraining(citadelId);
       let citadelPilots = await this.gameV1.getCitadelPilot(citadelId);
       let raid = await this.gameV1.getRaid(citadelId);
@@ -83,6 +85,9 @@ class CitadelDataLoader {
         citadel.id
       ]);
 
+      console.log("citadel fleet count 1")
+      console.log(citadelFleetCount)
+
       await this.pool.query(queries.UPDATE_ACTIVE_RAID, [
         citadel.id,
         raid[0].toNumber(),
@@ -106,6 +111,7 @@ class CitadelDataLoader {
       }
 
     } catch(err) {
+
       console.log(err);
     }
   }
