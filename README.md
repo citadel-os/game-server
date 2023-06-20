@@ -28,6 +28,12 @@ Runs on http://localhost:8000/
 `forever stop 0`
 `forever start app.js`
 
+`forever start -c "npx hardhat run" ./loader/eventListener.js --network goerli`
+
+`forever list`
+`tail -f ~/.forever/*.log`
+
+`forever start -c "npx hardhat run" ./loader/appLoader.js --network goerli`
 
 ## data model
     citadel

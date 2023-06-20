@@ -21,56 +21,66 @@ const pool = new Pool({
     port: 5432
 });
 
+const web3SocketOptions = {
+    keepAlive: true,
+    timeout: 60000,
+}
 const web3 = new Web3()
-const provider = new web3.providers.WebsocketProvider(ALCHEMY_SOCKETSERVER)
+const provider = new web3.providers.WebsocketProvider(ALCHEMY_SOCKETSERVER, web3SocketOptions);
 web3.setProvider(provider);
 
 
 var optionsRaid = {
     reconnect: {
         auto: true,
-        delay: 5000, // ms
-        maxAttempts: 50,
-        onTimeout: false
+        delay: 60000, // ms
+        maxAttempts: 500,
+        onTimeout: true
 },
     address: CITADEL_GAMEV1,
     topics: [
         RAID_TOPIC
     ],
-    fromBlock: 9000642
+    fromBlock: 9201150
 };
 
 var optionsUpdate = {
     reconnect: {
         auto: true,
-        delay: 5000, // ms
-        maxAttempts: 50,
-        onTimeout: false
+        delay: 60000, // ms
+        maxAttempts: 500,
+        onTimeout: true
 },
     address: CITADEL_GAMEV1,
     topics: [
         UPDATE_TOPIC
     ],
-    fromBlock: 9000642
+    fromBlock: 9201150
 };
 
 var optionsFleet = {
     reconnect: {
         auto: true,
-        delay: 5000, // ms
-        maxAttempts: 50,
-        onTimeout: false
+        delay: 60000, // ms
+        maxAttempts: 500,
+        onTimeout: true
 },
     address: CITADEL_FLEETV1,
     topics: [
         UPDATE_TOPIC
     ],
-    fromBlock: 9000642
+    fromBlock: 9201150
 };
 
 function main() {
 
     console.log("starting");
+
+    subscribe();
+
+}
+
+function subscribe() {
 
     // raids
     web3.eth.subscribe('logs', optionsRaid, function(error, result){
@@ -115,8 +125,8 @@ function main() {
     });
 
     console.log("subscribed to topics");
-
 }
+
 
 function decodeReportData(data) {
     const typesArray = [
@@ -145,35 +155,48 @@ function decodeUpdateData(data) {
 }
 
 async function writeReport(report, blocknumber) {
-    console.log("write report");
-    console.log(report.fromCitadelId);
-    await pool.query(queries.UPSERT_RAID_REPORT, [
-        report.fromCitadelId,
-        report.toCitadelId,
-        report.timeRaidHit,
-        parseInt(web3.utils.fromWei(report.offensiveCarryCapacity.toString(), 'ether')),
-        parseInt(web3.utils.fromWei(report.drakmaRaided.toString(), 'ether')),
-        report.offensiveSifGattacaDestroyed, 
-        report.offensiveMhrudvogThrotDestroyed, 
-        report.offensiveDrebentraakhtDestroyed, 
-        report.defensiveSifGattacaDestroyed, 
-        report.defensiveMhrudvogThrotDestroyed, 
-        report.defensiveDrebentraakhtDestroyed,
-        blocknumber
-      ]);
+    try {
+        console.log("write report");
+        console.log(report.fromCitadelId);
+        await pool.query(queries.UPSERT_RAID_REPORT, [
+            report.fromCitadelId,
+            report.toCitadelId,
+            report.timeRaidHit,
+            parseInt(web3.utils.fromWei(report.offensiveCarryCapacity.toString(), 'ether')),
+            parseInt(web3.utils.fromWei(report.drakmaRaided.toString(), 'ether')),
+            report.offensiveSifGattacaDestroyed, 
+            report.offensiveMhrudvogThrotDestroyed, 
+            report.offensiveDrebentraakhtDestroyed, 
+            report.defensiveSifGattacaDestroyed, 
+            report.defensiveMhrudvogThrotDestroyed, 
+            report.defensiveDrebentraakhtDestroyed,
+            blocknumber
+          ]);
+    } catch (err) {
+        console.log(err);
+    }
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
 }
 
 async function callUpdate(update, blocknumber) {
-    const GameV1 = await ethers.getContractFactory("CitadelGameV1");
-    const gameV1 = await GameV1.attach(CITADEL_GAMEV1);
-    const FleetV1 = await ethers.getContractFactory("CitadelFleetV1");
-    const fleetV1 = await FleetV1.attach(CITADEL_FLEETV1);
-    
-    const citadelDataLoader = new CitadelDataLoader(pool, gameV1, fleetV1);
-    
-    let citadelId = update.citadelId;
-    await citadelDataLoader.updateCitadel(citadelId);
-    console.log("citadel " + citadelId + " updated");
+
+    try {
+        const GameV1 = await ethers.getContractFactory("CitadelGameV1");
+        const gameV1 = await GameV1.attach(CITADEL_GAMEV1);
+        const FleetV1 = await ethers.getContractFactory("CitadelFleetV1");
+        const fleetV1 = await FleetV1.attach(CITADEL_FLEETV1);
+        
+        const citadelDataLoader = new CitadelDataLoader(pool, gameV1, fleetV1);
+        
+        let citadelId = update.citadelId;
+        await citadelDataLoader.updateCitadel(citadelId);
+        console.log("citadel " + citadelId + " updated");
+    } catch (err) {
+        console.log(err);
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
 }
 
