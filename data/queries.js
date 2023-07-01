@@ -133,36 +133,66 @@ queries = {
         VALUES($1, $2)
     `,
     UPSERT_RAID_REPORT: `
-    INSERT INTO raidReports(fromCitadel, toCitadel, timeRaidHit
+        INSERT INTO raidReports(fromCitadel, toCitadel, timeRaidHit
+            , offensiveCarryCapacity, drakmaRaided
+            , offensiveSifGattacaDestroyed, offensiveMhrudvogThrotDestroyed, offensiveDrebentraakhtDestroyed
+            , defensiveSifGattacaDestroyed, defensiveMhrudvogThrotDestroyed, defensiveDrebentraakhtDestroyed
+            , blocknumber
+        )
+        values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        ON CONFLICT(blocknumber, fromCitadel)
+        DO NOTHING
+    `,
+    GET_RAID_REPORT_FROM: `
+        SELECT fromCitadel, toCitadel, timeRaidHit
         , offensiveCarryCapacity, drakmaRaided
         , offensiveSifGattacaDestroyed, offensiveMhrudvogThrotDestroyed, offensiveDrebentraakhtDestroyed
         , defensiveSifGattacaDestroyed, defensiveMhrudvogThrotDestroyed, defensiveDrebentraakhtDestroyed
         , blocknumber
-    )
-    values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-    ON CONFLICT(blocknumber, fromCitadel)
-    DO NOTHING
-    `,
-    GET_RAID_REPORT_FROM: `
-    SELECT fromCitadel, toCitadel, timeRaidHit
-    , offensiveCarryCapacity, drakmaRaided
-    , offensiveSifGattacaDestroyed, offensiveMhrudvogThrotDestroyed, offensiveDrebentraakhtDestroyed
-    , defensiveSifGattacaDestroyed, defensiveMhrudvogThrotDestroyed, defensiveDrebentraakhtDestroyed
-    , blocknumber
-    FROM raidReports
-    WHERE fromCitadel = $1
-    ORDER BY blocknumber desc
+        FROM raidReports
+        WHERE fromCitadel = $1
+        ORDER BY blocknumber desc
     `,
     GET_RAID_REPORT_TO: `
-    SELECT fromCitadel, toCitadel, timeRaidHit
-    , offensiveCarryCapacity, drakmaRaided
-    , offensiveSifGattacaDestroyed, offensiveMhrudvogThrotDestroyed, offensiveDrebentraakhtDestroyed
-    , defensiveSifGattacaDestroyed, defensiveMhrudvogThrotDestroyed, defensiveDrebentraakhtDestroyed
-    , blocknumber
-    FROM raidReports
-    WHERE toCitadel = $1
-    ORDER BY blocknumber desc
-    `
+        SELECT fromCitadel, toCitadel, timeRaidHit
+        , offensiveCarryCapacity, drakmaRaided
+        , offensiveSifGattacaDestroyed, offensiveMhrudvogThrotDestroyed, offensiveDrebentraakhtDestroyed
+        , defensiveSifGattacaDestroyed, defensiveMhrudvogThrotDestroyed, defensiveDrebentraakhtDestroyed
+        , blocknumber
+        FROM raidReports
+        WHERE toCitadel = $1
+        ORDER BY blocknumber desc
+    `,
+    GET_ACTIVE_WALLETS: `
+        SELECT distinct walletAddress
+        FROM citadel
+    `,
+    UPSERT_WALLET: `
+        INSERT INTO wallet(
+            walletAddress, contract, tokenId, nftName
+        )
+        values($1, $2, $3, $4)
+        ON CONFLICT(walletAddress, contract, tokenId)
+        DO NOTHING
+    `,
+    DIM_WALLET: `
+        DELETE FROM wallet
+        WHERE walletAddress NOT IN (
+            SELECT DISTINCT walletAddress
+            FROM citadel 
+        )
+    `,
+    GET_ALL_WALLETS: `
+        SELECT walletAddress, contract, tokenId, nftName
+        FROM wallet
+        order by walletAddress, contract, tokenId
+    `,
+    GET_WALLET: `
+        SELECT walletAddress, contract, tokenId, nftName
+        FROM wallet
+        WHERE walletAddress = $1
+        order by walletAddress, contract, tokenId
+    `,
 };
 
 module.exports = queries;

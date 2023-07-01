@@ -80,10 +80,39 @@ function mapRaidReport(dbReport) {
     };
     return report;
 }
+ 
+function mapWallet(dbWallet, lastWallet) {
+    let wallet = {
+        totalCount: 0,
+    };
+
+    if (lastWallet.address == dbWallet.walletaddress) {
+        wallet = structuredClone(lastWallet);
+    } else {
+        wallet.ownedNfts = [];
+        wallet.address = dbWallet.walletaddress;
+    }
+
+    let nft = {
+        contract: {
+            address: dbWallet.contract,
+            id: {
+                tokenId: dbWallet.tokenid
+            },
+            balance: 1
+        }
+    }
+    
+    wallet.ownedNfts.push(nft);
+    wallet.totalCount = wallet.totalCount + 1;
+    
+    return wallet;
+}
 
 module.exports = {
     mapCitadel: mapCitadel,
     mapGrid: mapGrid,
     mapRaid: mapRaid,
-    mapRaidReport: mapRaidReport
+    mapRaidReport: mapRaidReport,
+    mapWallet: mapWallet
 };

@@ -1,31 +1,41 @@
 const queries = require("../data/queries");
+const fetch = require('node-fetch');
 
 class CitadelDataLoader {
 
   ETH_DIVISOR = 1000000000000000000;
   
-  constructor(pool, gameV1, fleetV1) {
+  
+  constructor(pool, gameV1, fleetV1, env) {
     this.pool = pool;
     this.gameV1 = gameV1;
     this.fleetV1 = fleetV1;
+    this.env = env;
   }
 
   async loadData() {
     let runForever = true;
     while (runForever) {
+      console.log("== updating active wallets ==");
+      
+      await this.loadWalletData();
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+
+      console.log("== updating citadel ==");
       for(let i=0; i<1023; i++) {
         await this.updateCitadel(i);
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 3000));
         console.log("citadel: " + i + " updated");
       }
 
-      console.log("dimming grid");
+      console.log("== dimming grid ==");
       var res = await this.pool.query(queries.DIM_GRID, []);
       console.log(res);
 
-      console.log("done loading citadel, waiting for next run");
-      await new Promise(resolve => setTimeout(resolve, 7500));
+      console.log("== done with data load, waiting for next run ==");
+      await new Promise(resolve => setTimeout(resolve, 300000));
     }
   }
 
@@ -111,6 +121,48 @@ class CitadelDataLoader {
     }
   }
 
+  async loadWalletData() {
+    try {
+      let results = await this.pool.query(queries.GET_ACTIVE_WALLETS);
+
+      for(let i=0; i < results.rows.length; i++) {
+        let wallet = results.rows[i];
+        let nftOwnershipURL = this.env.ALCHEMY_NFT_URL +
+          "?owner=" +  wallet.walletaddress + 
+          "&contractAddresses[]=" + this.env.CITADEL_NFT +
+          "&contractAddresses[]=" + this.env.PILOT_NFT +
+          "&withMetadata=false";
+          
+        let response = await fetch(nftOwnershipURL, {
+          method: 'GET',
+          headers: {'Content-Type': 'application/json'}
+        });
+  
+        const data = await response.json();
+  
+        for(let j=0; j < data.ownedNfts.length; j++) {
+          let nft = data.ownedNfts[j];
+
+          let nftName = "CITADEL";
+          if (nft.contract.address == this.env.PILOT_NFT) {
+            nftName = "PILOT";
+          }
+  
+          await this.pool.query(queries.UPSERT_WALLET, [
+            wallet.walletaddress, 
+            nft.contract.address,
+            nft.id.tokenId,
+            nftName
+          ]);
+          
+        }
+        console.log(wallet.walletaddress + " updated with " + data.ownedNfts.length + " nft");
+      }
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
 }
 
 module.exports = CitadelDataLoader;

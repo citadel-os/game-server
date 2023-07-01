@@ -90,3 +90,16 @@ ADD COLUMN defensiveDrebentraakhtDestroyed INTEGER;
 ALTER TABLE citadel
 DROP COLUMN isOnline,
 DROP COLUMN fleetPoints;
+
+CREATE TABLE wallet (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    walletAddress VARCHAR(42),
+    contract VARCHAR(256),
+    nftName VARCHAR(64),
+    tokenId VARCHAR(256),
+    balance INTEGER
+);
+
+ALTER TABLE wallet
+    ADD CONSTRAINT wallet_unique
+    UNIQUE (walletAddress, contract, tokenId);

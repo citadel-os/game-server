@@ -36,7 +36,8 @@
     "pg": "^8.8.0",
     "watch": "^1.0.2",
     "web3": "^1.8.1",
-    "web3-eth": "^1.8.2"
+    "web3-eth": "^1.8.2",
+    "node-fetch": "2.6.6"
   },
   "devDependencies": {
     "ethers": "5.4"
