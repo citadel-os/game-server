@@ -55,7 +55,7 @@ var optionsUpdate = {
     topics: [
         UPDATE_TOPIC
     ],
-    fromBlock: 9201150
+    fromBlock: 9286550
 };
 
 var optionsFleet = {
@@ -69,7 +69,7 @@ var optionsFleet = {
     topics: [
         UPDATE_TOPIC
     ],
-    fromBlock: 9201150
+    fromBlock: 9286550
 };
 
 function main() {

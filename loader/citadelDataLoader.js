@@ -43,12 +43,12 @@ class CitadelDataLoader {
     try {
       let citadelStats = await this.gameV1.getCitadel(citadelId);
       let citadelMining = await this.gameV1.getCitadelMining(citadelId);
-      let citadelFleetCount = await this.fleetV1.getTrainedFleet(citadelId);
+      let citadelFleetCount = await this.gameV1.getCitadelFleetCount(citadelId);
       let citadelFleetTrainingCount = await this.fleetV1.getFleetInTraining(citadelId);
       let citadelPilots = await this.gameV1.getCitadelPilot(citadelId);
       let raid = await this.gameV1.getRaid(citadelId);
-
-      let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR);
+  
+      let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR)
       let gridId = citadelStats[1].toNumber() == 0 ? null : citadelStats[1].toNumber();
       let isLit = citadelMining[0].toNumber() > 0 ? true : false;
       let citadel = {
@@ -63,7 +63,7 @@ class CitadelDataLoader {
         timeLastRaided: citadelMining[2].toNumber(),
         unclaimedDrakma: unclaimedDrakma
       }
-
+  
       await this.pool.query(queries.UPDATE_CITADEL, [
         citadel.walletAddress, 
         citadel.gridId, 
@@ -75,14 +75,12 @@ class CitadelDataLoader {
         citadel.pilotCount,
         citadel.id
       ]);
-
-      if(citadel.gridId != null) {
-        await this.pool.query(queries.UPDATE_GRID, [
-          citadel.isLit, 
-          citadel.gridId
-        ]);
-      }
-
+  
+      await this.pool.query(queries.UPDATE_GRID, [
+        citadel.isLit, 
+        citadel.gridId
+      ]);
+  
       await this.pool.query(queries.UPDATE_FLEET, [
         citadelFleetCount[0].toNumber(),
         citadelFleetCount[1].toNumber(),
@@ -92,7 +90,7 @@ class CitadelDataLoader {
         citadelFleetTrainingCount[2].toNumber(),
         citadel.id
       ]);
-
+  
       await this.pool.query(queries.UPDATE_ACTIVE_RAID, [
         citadel.id,
         raid[0].toNumber(),
@@ -102,11 +100,11 @@ class CitadelDataLoader {
         raid[4].toNumber(),
         raid[5].toNumber()
       ]);
-
+  
       await this.pool.query(queries.DELETE_CITADEL_PILOT, [
         citadelId
       ]);
-
+  
       for(let j = 0; j< citadelPilots.length; j++) {
         let pilotId = citadelPilots[j].toNumber()
         await this.pool.query(queries.INSERT_CITADEL_PILOT, [
@@ -114,6 +112,8 @@ class CitadelDataLoader {
           pilotId
         ]);
       }
+  
+      await this.pool.query(queries.DIM_GRID, []);
 
     } catch(err) {
 
@@ -123,12 +123,25 @@ class CitadelDataLoader {
 
   async loadWalletData() {
     try {
-      let results = await this.pool.query(queries.GET_ACTIVE_WALLETS);
+      let allCitadelWalletOwnersURL = this.env.ALCHEMY_NFT_URL +
+        "/getOwnersForCollection/" +
+        "?contractAddress=" + this.env.CITADEL_NFT +
+        "&withMetadata=false";
 
-      for(let i=0; i < results.rows.length; i++) {
-        let wallet = results.rows[i];
+      let allCitadelResponse = await fetch(allCitadelWalletOwnersURL, {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+      });
+
+      const allCitadelData = await allCitadelResponse.json();
+
+      for(let i=0; i < allCitadelData.ownerAddresses.length; i++) {
+
+        let wallet = allCitadelData.ownerAddresses[i];
+
         let nftOwnershipURL = this.env.ALCHEMY_NFT_URL +
-          "?owner=" +  wallet.walletaddress + 
+          "/getNFTs/" +
+          "?owner=" +  wallet + 
           "&contractAddresses[]=" + this.env.CITADEL_NFT +
           "&contractAddresses[]=" + this.env.PILOT_NFT +
           "&withMetadata=false";
@@ -149,14 +162,14 @@ class CitadelDataLoader {
           }
   
           await this.pool.query(queries.UPSERT_WALLET, [
-            wallet.walletaddress, 
+            wallet, 
             nft.contract.address,
             nft.id.tokenId,
             nftName
           ]);
-          
         }
-        console.log(wallet.walletaddress + " updated with " + data.ownedNfts.length + " nft");
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        console.log(wallet + " updated with " + data.ownedNfts.length + " nft");
       }
     }
     catch(err) {
