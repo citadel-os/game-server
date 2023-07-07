@@ -119,6 +119,8 @@ class CitadelDataLoader {
 
       console.log(err);
     }
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
   async loadWalletData() {
