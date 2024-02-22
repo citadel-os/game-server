@@ -7,8 +7,8 @@ let CitadelDataLoader = require("./citadelDataLoader.js");
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_HOST = process.env.DB_HOST;
-const CITADEL_FLEETV1 = process.env.CITADEL_FLEETV1;
-const CITADEL_GAMEV1 = process.env.CITADEL_GAMEV1;
+const CITADEL_STORAGEV2 = process.env.CITADEL_STORAGEV2;
+const CITADEL_GAMEV2 = process.env.CITADEL_GAMEV2;
 const RAID_TOPIC = process.env.RAID_TOPIC;
 const UPDATE_TOPIC = process.env.UPDATE_TOPIC;
 const ALCHEMY_SOCKETSERVER = process.env.ALCHEMY_SOCKETSERVER;
@@ -37,7 +37,7 @@ var optionsRaid = {
         maxAttempts: 500,
         onTimeout: true
 },
-    address: CITADEL_GAMEV1,
+    address: CITADEL_GAMEV2,
     topics: [
         RAID_TOPIC
     ],
@@ -51,7 +51,7 @@ var optionsUpdate = {
         maxAttempts: 500,
         onTimeout: true
 },
-    address: CITADEL_GAMEV1,
+    address: CITADEL_GAMEV2,
     topics: [
         UPDATE_TOPIC
     ],
@@ -65,7 +65,7 @@ var optionsFleet = {
         maxAttempts: 500,
         onTimeout: true
 },
-    address: CITADEL_FLEETV1,
+    address: CITADEL_STORAGEV2,
     topics: [
         UPDATE_TOPIC
     ],
@@ -182,12 +182,12 @@ async function writeReport(report, blocknumber) {
 async function callUpdate(update, blocknumber) {
 
     try {
-        const GameV1 = await ethers.getContractFactory("CitadelGameV1");
-        const gameV1 = await GameV1.attach(CITADEL_GAMEV1);
-        const FleetV1 = await ethers.getContractFactory("CitadelFleetV1");
-        const fleetV1 = await FleetV1.attach(CITADEL_FLEETV1);
+        const GameV2 = await ethers.getContractFactory("CitadelGameV2");
+        const gameV2 = await GameV2.attach(CITADEL_GAMEV2);
+        const StorageV2 = await ethers.getContractFactory("StorageV2");
+        const storageV2 = await StorageV2.attach(CITADEL_STORAGEV2);
         
-        const citadelDataLoader = new CitadelDataLoader(pool, gameV1, fleetV1);
+        const citadelDataLoader = new CitadelDataLoader(pool, gameV2, storageV2);
         
         let citadelId = update.citadelId;
         await citadelDataLoader.updateCitadel(citadelId);

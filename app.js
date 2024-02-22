@@ -8,15 +8,15 @@ const gridRoute = require("./routes/grid");
 const raidRoute = require("./routes/raid");
 const walletRoute = require("./routes/wallet");
 const { ethers } = require("ethers");
-const {abiCitadelGameV1, abiCitadelFleetV1} = require("./utilities/abi");
+const {abiCitadelGameV2, abiStorageV2} = require("./utilities/abi");
 require('dotenv').config();
 
 const env = {
   DB_USERNAME: process.env.DB_USERNAME,
   DB_PASSWORD: process.env.DB_PASSWORD,
   DB_HOST: process.env.DB_HOST,
-  CITADEL_GAMEV1: process.env.CITADEL_GAMEV1,
-  CITADEL_FLEETV1: process.env.CITADEL_FLEETV1,
+  CITADEL_GAMEV2: process.env.CITADEL_GAMEV2,
+  CITADEL_STORAGEV2: process.env.CITADEL_STORAGEV2,
   ALCHEMY_APISERVER: process.env.ALCHEMY_APISERVER,
   ALCHEMY_NFT_URL: process.env.ALCHEMY_NFT_URL,
   ETH_CHAINID: process.env.ETH_CHAIN_ID,
@@ -73,11 +73,11 @@ app.listen(3000);
 async function loadEthereumVars() {
   const provider = new ethers.providers.JsonRpcProvider(env.ALCHEMY_APISERVER, env.ETH_CHAINID);
   const signer = new ethers.Wallet(env.PRIVATE_KEY, provider);
-  const gameV1 = new ethers.Contract(env.CITADEL_GAMEV1, abiCitadelGameV1, signer);
-  const fleetV1 = new ethers.Contract(env.CITADEL_FLEETV1, abiCitadelFleetV1, signer);
+  const gameV2 = new ethers.Contract(env.CITADEL_GAMEV2, abiCitadelGameV2, signer);
+  const storageV2 = new ethers.Contract(env.CITADEL_STORAGEV2, abiStorageV2, signer);
 
-  app.locals.gameV1 = gameV1;
-  app.locals.fleetV1 = fleetV1;
+  app.locals.gameV2 = gameV2;
+  app.locals.storageV2 = storageV2;
 }
 
 module.exports = app;

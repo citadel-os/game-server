@@ -6,10 +6,10 @@ class CitadelDataLoader {
   ETH_DIVISOR = 1000000000000000000;
   
   
-  constructor(pool, gameV1, fleetV1, env) {
+  constructor(pool, gameV2, storageV2, env) {
     this.pool = pool;
-    this.gameV1 = gameV1;
-    this.fleetV1 = fleetV1;
+    this.gameV2 = gameV2;
+    this.storageV2 = storageV2;
     this.env = env;
   }
 
@@ -41,12 +41,12 @@ class CitadelDataLoader {
 
   async updateCitadel(citadelId) {
     try {
-      let citadelStats = await this.gameV1.getCitadel(citadelId);
-      let citadelMining = await this.gameV1.getCitadelMining(citadelId);
-      let citadelFleetCount = await this.gameV1.getCitadelFleetCount(citadelId);
-      let citadelFleetTrainingCount = await this.fleetV1.getFleetInTraining(citadelId);
-      let citadelPilots = await this.gameV1.getCitadelPilot(citadelId);
-      let raid = await this.gameV1.getRaid(citadelId);
+      let citadelStats = await this.gameV2.getCitadel(citadelId);
+      let citadelMining = await this.gameV2.getCitadelMining(citadelId);
+      let citadelFleetCount = await this.gameV2.getCitadelFleetCount(citadelId);
+      let citadelFleetTrainingCount = await this.storageV2.getFleetInTraining(citadelId);
+      let citadelPilots = await this.gameV2.getCitadelPilot(citadelId);
+      let raid = await this.gameV2.getRaid(citadelId);
   
       let unclaimedDrakma = Math.floor(citadelMining[3].toString() / this.ETH_DIVISOR)
       let gridId = citadelStats[1].toNumber() == 0 ? null : citadelStats[1].toNumber();

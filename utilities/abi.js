@@ -2786,7 +2786,7 @@ const abiSovereignCollective = [
     }
   ];
   
-const abiCitadelGameV1 = [
+const abiCitadelGameV2 = [
   {
     "inputs": [
       {
@@ -2805,13 +2805,18 @@ const abiCitadelGameV1 = [
         "type": "address"
       },
       {
+        "internalType": "contract ISTORAGEV2",
+        "name": "_storageEngine",
+        "type": "address"
+      },
+      {
         "internalType": "contract ICOMBATENGINE",
         "name": "_combatEngine",
         "type": "address"
       },
       {
-        "internalType": "contract IFLEETENGINE",
-        "name": "_fleetEngine",
+        "internalType": "contract ISOVEREIGN",
+        "name": "_sovereignCollective",
         "type": "address"
       }
     ],
@@ -2824,71 +2829,11 @@ const abiCitadelGameV1 = [
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "fromCitadelId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "toCitadelId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timeRaidHit",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "offensiveCarryCapacity",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "drakmaRaided",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "offensiveSifGattacaDestroyed",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "offensiveMhrudvogThrotDestroyed",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "offensiveDrebentraakhtDestroyed",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "defensiveSifGattacaDestroyed",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "defensiveMhrudvogThrotDestroyed",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "defensiveDrebentraakhtDestroyed",
+        "name": "citadelId",
         "type": "uint256"
       }
     ],
-    "name": "DispatchRaid",
+    "name": "CitadelEvent",
     "type": "event"
   },
   {
@@ -2909,6 +2854,29 @@ const abiCitadelGameV1 = [
     ],
     "name": "OwnershipTransferred",
     "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_sovereignId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_capitalId",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "bribeCapital",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [],
@@ -2950,19 +2918,6 @@ const abiCitadelGameV1 = [
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_citadelId",
-        "type": "uint256"
-      }
-    ],
-    "name": "dimGrid",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "drakma",
     "outputs": [
@@ -2970,148 +2925,6 @@ const abiCitadelGameV1 = [
         "internalType": "contract IERC20",
         "name": "",
         "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_citadelId",
-        "type": "uint256"
-      }
-    ],
-    "name": "escapeHatch",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "fleetEngine",
-    "outputs": [
-      {
-        "internalType": "contract IFLEETENGINE",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_citadelId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getCitadel",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_citadelId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getCitadelFleetCount",
-    "outputs": [
-      {
-        "internalType": "int256",
-        "name": "",
-        "type": "int256"
-      },
-      {
-        "internalType": "int256",
-        "name": "",
-        "type": "int256"
-      },
-      {
-        "internalType": "int256",
-        "name": "",
-        "type": "int256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_citadelId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getCitadelMining",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_citadelId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getCitadelPilot",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
       }
     ],
     "stateMutability": "view",
@@ -3131,25 +2944,6 @@ const abiCitadelGameV1 = [
         "internalType": "bool",
         "name": "",
         "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_fromCitadelId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getRaid",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       },
       {
         "internalType": "uint256",
@@ -3157,19 +2951,9 @@ const abiCitadelGameV1 = [
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
+        "internalType": "bool",
         "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        "type": "bool"
       },
       {
         "internalType": "uint256",
@@ -3177,20 +2961,7 @@ const abiCitadelGameV1 = [
         "type": "uint256"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "lastTimeRewardApplicable",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -3201,9 +2972,9 @@ const abiCitadelGameV1 = [
         "type": "uint256"
       },
       {
-        "internalType": "uint256[]",
+        "internalType": "uint256[3]",
         "name": "_pilotIds",
-        "type": "uint256[]"
+        "type": "uint256[3]"
       },
       {
         "internalType": "uint256",
@@ -3212,11 +2983,44 @@ const abiCitadelGameV1 = [
       },
       {
         "internalType": "uint8",
-        "name": "_factionId",
+        "name": "_capitalId",
         "type": "uint8"
       }
     ],
     "name": "liteGrid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fromCitadelId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_toCitadelId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_usurper",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_sovereignId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_capitalId",
+        "type": "uint8"
+      }
+    ],
+    "name": "overthrowSovereign",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -3262,7 +3066,7 @@ const abiCitadelGameV1 = [
         "type": "uint256"
       }
     ],
-    "name": "resolveRaid",
+    "name": "resolveSiege",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -3271,36 +3075,26 @@ const abiCitadelGameV1 = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_fromCitadel",
+        "name": "_citadelId",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_capitalId",
+        "type": "uint8"
       },
       {
         "internalType": "uint256",
-        "name": "_toCitadel",
+        "name": "bribeAmt",
         "type": "uint256"
       },
       {
-        "internalType": "uint256[]",
-        "name": "_pilot",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_sifGattaca",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_mhrudvogThrot",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_drebentraakht",
-        "type": "uint256"
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
       }
     ],
-    "name": "sendRaid",
+    "name": "sackCapital",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -3318,22 +3112,94 @@ const abiCitadelGameV1 = [
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
-        "name": "_sifGattaca",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_mhrudvogThrot",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_drebentraakht",
-        "type": "uint256"
+        "internalType": "uint256[3]",
+        "name": "_fleet",
+        "type": "uint256[3]"
       }
     ],
     "name": "sendReinforcements",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fromCitadel",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_toCitadel",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_pilotId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[3]",
+        "name": "_fleet",
+        "type": "uint256[3]"
+      }
+    ],
+    "name": "sendSiege",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "sovereignCollective",
+    "outputs": [
+      {
+        "internalType": "contract ISOVEREIGN",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "storageEngine",
+    "outputs": [
+      {
+        "internalType": "contract ISTORAGEV2",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_sifGattaca",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_mhrudvogThrot",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_drebentraakht",
+        "type": "uint256"
+      }
+    ],
+    "name": "trainFleet",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -3352,49 +3218,98 @@ const abiCitadelGameV1 = [
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_periodFinish",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "_escapeHatchOn",
-        "type": "bool"
-      }
-    ],
-    "name": "updateGameParams",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "withdrawDrakma",
+    "inputs": [],
+    "name": "winCitadel",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   }
 ];
   
-const abiCitadelFleetV1 = [
+const abiStorageV2 = [
   {
     "inputs": [
       {
-        "internalType": "contract IERC20",
-        "name": "_drakma",
+        "internalType": "contract ICOMBATENGINE",
+        "name": "_combatEngine",
         "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "fromCitadelId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "toCitadelId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timeSiegeHit",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "offensiveCarryCapacity",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "drakmaSieged",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "offensiveSifGattacaDestroyed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "offensiveMhrudvogThrotDestroyed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "offensiveDrebentraakhtDestroyed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "defensiveSifGattacaDestroyed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "defensiveMhrudvogThrotDestroyed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "defensiveDrebentraakhtDestroyed",
+        "type": "uint256"
+      }
+    ],
+    "name": "DispatchSiege",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -3421,24 +3336,68 @@ const abiCitadelFleetV1 = [
         "internalType": "uint256",
         "name": "_citadelId",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_capitalId",
+        "type": "uint8"
       }
     ],
-    "name": "calculateTrainedFleet",
+    "name": "bribeCapital",
     "outputs": [
       {
-        "internalType": "int256",
+        "internalType": "uint256",
         "name": "",
-        "type": "int256"
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "citadel",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "gridId",
+        "type": "uint256"
       },
       {
-        "internalType": "int256",
-        "name": "",
-        "type": "int256"
+        "internalType": "uint8",
+        "name": "capitalId",
+        "type": "uint8"
       },
       {
-        "internalType": "int256",
-        "name": "",
-        "type": "int256"
+        "internalType": "uint256",
+        "name": "timeOfLastClaim",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "timeLit",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "timeLastSieged",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "unclaimedDrakma",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "marker",
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -3447,43 +3406,28 @@ const abiCitadelFleetV1 = [
   {
     "inputs": [
       {
-        "internalType": "int256",
-        "name": "_sifGattaca",
-        "type": "int256"
-      },
-      {
-        "internalType": "int256",
-        "name": "_mhrudvogThrot",
-        "type": "int256"
-      },
-      {
-        "internalType": "int256",
-        "name": "_drebentraakht",
-        "type": "int256"
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
       }
     ],
-    "name": "calculateTrainingCost",
+    "name": "claim",
     "outputs": [
       {
-        "internalType": "int256",
+        "internalType": "uint256",
         "name": "",
-        "type": "int256"
-      },
-      {
-        "internalType": "int256",
-        "name": "",
-        "type": "int256"
+        "type": "uint256"
       }
     ],
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "drakma",
+    "name": "combatEngine",
     "outputs": [
       {
-        "internalType": "contract IERC20",
+        "internalType": "contract ICOMBATENGINE",
         "name": "",
         "type": "address"
       }
@@ -3495,26 +3439,109 @@ const abiCitadelFleetV1 = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_citadelId",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "getFleetInTraining",
+    "name": "fleet",
     "outputs": [
       {
-        "internalType": "int256",
-        "name": "",
-        "type": "int256"
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "sifGattaca",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mhrudvogThrot",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "drebentraakht",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct StorageV2.Fleet",
+        "name": "stationedFleet",
+        "type": "tuple"
       },
       {
-        "internalType": "int256",
-        "name": "",
-        "type": "int256"
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "sifGattaca",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mhrudvogThrot",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "drebentraakht",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct StorageV2.Fleet",
+        "name": "trainingFleet",
+        "type": "tuple"
       },
       {
-        "internalType": "int256",
+        "internalType": "uint256",
+        "name": "trainingStarted",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "trainingDone",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isValue",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "_capitalId",
+        "type": "uint8"
+      }
+    ],
+    "name": "getCapital",
+    "outputs": [
+      {
+        "internalType": "uint256",
         "name": "",
-        "type": "int256"
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -3528,31 +3555,18 @@ const abiCitadelFleetV1 = [
         "type": "uint256"
       }
     ],
-    "name": "getTrainedFleet",
+    "name": "getCitadelFleetCount",
     "outputs": [
       {
-        "internalType": "int256",
+        "internalType": "uint256",
         "name": "",
-        "type": "int256"
+        "type": "uint256"
       },
       {
-        "internalType": "int256",
+        "internalType": "uint256",
         "name": "",
-        "type": "int256"
+        "type": "uint256"
       },
-      {
-        "internalType": "int256",
-        "name": "",
-        "type": "int256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "lastTimeRewardApplicable",
-    "outputs": [
       {
         "internalType": "uint256",
         "name": "",
@@ -3560,6 +3574,146 @@ const abiCitadelFleetV1 = [
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fromCitadelId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getSiege",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "grid",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "isCapital",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "sovereignUntil",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isLit",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "citadelId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[3]",
+        "name": "_pilotIds",
+        "type": "uint256[3]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_gridId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_capitalId",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_sovereignUntil",
+        "type": "uint256"
+      }
+    ],
+    "name": "liteGrid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fromCitadelId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_toCitadelId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_capitalId",
+        "type": "uint8"
+      }
+    ],
+    "name": "overthrowSovereign",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -3586,12 +3740,18 @@ const abiCitadelFleetV1 = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_citadelId",
+        "name": "_fromCitadel",
         "type": "uint256"
       }
     ],
-    "name": "resolveTraining",
-    "outputs": [],
+    "name": "resolveSiege",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -3603,19 +3763,110 @@ const abiCitadelFleetV1 = [
         "type": "uint256"
       },
       {
-        "internalType": "int256",
+        "internalType": "uint8",
+        "name": "_capitalId",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "bribeAmt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      }
+    ],
+    "name": "sackCapital",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fromCitadel",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_toCitadel",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[3]",
+        "name": "_fleet",
+        "type": "uint256[3]"
+      }
+    ],
+    "name": "sendReinforcements",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fromCitadel",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_toCitadel",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_pilotId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[3]",
+        "name": "_fleet",
+        "type": "uint256[3]"
+      }
+    ],
+    "name": "sendSiege",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_citadelId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
         "name": "_sifGattaca",
-        "type": "int256"
+        "type": "uint256"
       },
       {
-        "internalType": "int256",
+        "internalType": "uint256",
         "name": "_mhrudvogThrot",
-        "type": "int256"
+        "type": "uint256"
       },
       {
-        "internalType": "int256",
+        "internalType": "uint256",
         "name": "_drebentraakht",
-        "type": "int256"
+        "type": "uint256"
       }
     ],
     "name": "trainFleet",
@@ -3639,63 +3890,12 @@ const abiCitadelFleetV1 = [
   {
     "inputs": [
       {
-        "internalType": "int256",
-        "name": "_sifGattacaPrice",
-        "type": "int256"
-      },
-      {
-        "internalType": "int256",
-        "name": "_mhrudvogThrotPrice",
-        "type": "int256"
-      },
-      {
-        "internalType": "int256",
-        "name": "_drebentraakhtPrice",
-        "type": "int256"
-      },
-      {
-        "internalType": "int256",
-        "name": "_sifGattacaTrainingTime",
-        "type": "int256"
-      },
-      {
-        "internalType": "int256",
-        "name": "_mhrudvogThrotTrainingTime",
-        "type": "int256"
-      },
-      {
-        "internalType": "int256",
-        "name": "_drebentraakhtTrainingTime",
-        "type": "int256"
+        "internalType": "address",
+        "name": "_accessAddress",
+        "type": "address"
       }
     ],
-    "name": "updateFleetParams",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_periodFinish",
-        "type": "uint256"
-      }
-    ],
-    "name": "updateGameParams",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "withdrawDrakma",
+    "name": "updateAccessAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -3703,6 +3903,6 @@ const abiCitadelFleetV1 = [
 ];
 
 module.exports = {
-    abiCitadelFleetV1: abiCitadelFleetV1,
-    abiCitadelGameV1: abiCitadelGameV1
+    abiStorageV2: abiStorageV2,
+    abiCitadelGameV2: abiCitadelGameV2
 };

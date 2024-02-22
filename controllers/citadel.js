@@ -62,15 +62,15 @@ class CitadelController {
   async updateCitadel(req, res) {
     let citadelId = req.params.id;
     const pool = req.app.locals.pool;
-    const gameV1 = req.app.locals.gameV1;
-    const fleetV1 = req.app.locals.fleetV1;
+    const gameV2 = req.app.locals.gameV2;
+    const storageV2 = req.app.locals.storageV2;
 
-    let citadelStats = await gameV1.getCitadel(citadelId);
-    let citadelMining = await gameV1.getCitadelMining(citadelId);
-    let citadelFleetCount = await gameV1.getCitadelFleetCount(citadelId);
-    let citadelFleetTrainingCount = await fleetV1.getFleetInTraining(citadelId);
-    let citadelPilots = await gameV1.getCitadelPilot(citadelId);
-    let raid = await gameV1.getRaid(citadelId);
+    let citadelStats = await gameV2.getCitadel(citadelId);
+    let citadelMining = await gameV2.getCitadelMining(citadelId);
+    let citadelFleetCount = await gameV2.getCitadelFleetCount(citadelId);
+    let citadelFleetTrainingCount = await storageV2.getFleetInTraining(citadelId);
+    let citadelPilots = await gameV2.getCitadelPilot(citadelId);
+    let raid = await gameV2.getRaid(citadelId);
 
     let unclaimedDrakma = Math.floor(citadelMining[3].toString() / ETH_DIVISOR)
     let gridId = citadelStats[1].toNumber() == 0 ? null : citadelStats[1].toNumber();
