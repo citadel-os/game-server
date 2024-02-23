@@ -44,7 +44,7 @@ class CitadelDataLoader {
       let citadelStats = await this.gameV2.getCitadel(citadelId);
       let citadelMining = await this.gameV2.getCitadelMining(citadelId);
       let citadelFleetCount = await this.gameV2.getCitadelFleetCount(citadelId);
-      let citadelFleetTrainingCount = await this.storageV2.getFleetInTraining(citadelId);
+      let citadelFleetTrainingCount = await this.fleetV1.getFleetInTraining(citadelId);
       let citadelPilots = await this.gameV2.getCitadelPilot(citadelId);
       let raid = await this.gameV2.getRaid(citadelId);
   
@@ -55,7 +55,7 @@ class CitadelDataLoader {
         id: citadelId,
         walletAddress: citadelStats[0],
         gridId: gridId,
-        factionId: citadelStats[2],
+        capitalId: citadelStats[2],
         pilotCount: citadelStats[3].toNumber(),
         isLit: isLit,
         timeLit: citadelMining[0].toNumber(),
@@ -67,7 +67,7 @@ class CitadelDataLoader {
       await this.pool.query(queries.UPDATE_CITADEL, [
         citadel.walletAddress, 
         citadel.gridId, 
-        citadel.factionId,
+        citadel.capitalId,
         citadel.timeLit,
         citadel.timeOfLastClaim,
         citadel.timeLastRaided,

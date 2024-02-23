@@ -5,7 +5,7 @@ const logger = require("morgan");
 const Pool = require('pg').Pool;
 const citadelRoute = require("./routes/citadel");
 const gridRoute = require("./routes/grid");
-const raidRoute = require("./routes/raid");
+const siegeRoute = require("./routes/siege");
 const walletRoute = require("./routes/wallet");
 const { ethers } = require("ethers");
 const {abiCitadelGameV2, abiStorageV2} = require("./utilities/abi");
@@ -52,7 +52,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/v1/citadel", citadelRoute);
 app.use("/api/v1/grid", gridRoute);
-app.use("/api/v1/raid", raidRoute);
+app.use("/api/v1/siege", siegeRoute);
 app.use("/api/v1/wallet", walletRoute);
 
 app.use((req, res, next) => {

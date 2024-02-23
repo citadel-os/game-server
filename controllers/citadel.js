@@ -74,14 +74,14 @@ class CitadelController {
 
     let unclaimedDrakma = Math.floor(citadelMining[3].toString() / ETH_DIVISOR)
     let gridId = citadelStats[1].toNumber() == 0 ? null : citadelStats[1].toNumber();
-    let isLit = citadelMining[0].toNumber() > 0 ? true : false;
+    let is_lit = citadelMining[0].toNumber() > 0 ? true : false;
     let citadel = {
       id: citadelId,
       walletAddress: citadelStats[0],
       gridId: gridId,
-      factionId: citadelStats[2],
+      capitalId: citadelStats[2],
       pilotCount: citadelStats[3].toNumber(),
-      isLit: isLit,
+      is_lit: is_lit,
       timeLit: citadelMining[0].toNumber(),
       timeOfLastClaim: citadelMining[1].toNumber(),
       timeLastRaided: citadelMining[2].toNumber(),
@@ -91,7 +91,7 @@ class CitadelController {
     await pool.query(queries.UPDATE_CITADEL, [
       citadel.walletAddress, 
       citadel.gridId, 
-      citadel.factionId,
+      citadel.capital_id,
       citadel.timeLit,
       citadel.timeOfLastClaim,
       citadel.timeLastRaided,
@@ -101,7 +101,7 @@ class CitadelController {
     ]);
 
     await pool.query(queries.UPDATE_GRID, [
-      citadel.isLit, 
+      citadel.is_lit, 
       citadel.gridId
     ]);
 

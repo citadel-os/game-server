@@ -3642,7 +3642,7 @@ const abiStorageV2 = [
       },
       {
         "internalType": "bool",
-        "name": "isLit",
+        "name": "is_lit",
         "type": "bool"
       },
       {

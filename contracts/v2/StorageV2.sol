@@ -103,7 +103,7 @@ contract StorageV2 is Ownable {
     struct Grid {
         bool isCapital;
         uint256 sovereignUntil;
-        bool isLit;
+        bool is_lit;
         uint256 citadelId;
     }
 
@@ -120,7 +120,7 @@ contract StorageV2 is Ownable {
     mapping(uint256 => FleetAcademy) public fleet; // index is _citadelId
     mapping(uint256 => Siege) siege; // index is _fromCitadelId
     mapping(uint256 => FleetReinforce) reinforcements; // index is _fromCitadelId
-    mapping(uint256 => bool) pilot; // index is _pilotId, value isLit
+    mapping(uint256 => bool) pilot; // index is _pilotId, value is_lit
     mapping(uint256 => Grid) public grid;
     mapping(uint8 => Capital) capital;
 
@@ -168,7 +168,7 @@ contract StorageV2 is Ownable {
         uint256 _sovereignUntil
     ) public {
         checkAccess();
-        require(!grid[_gridId].isLit, "cannot lite");
+        require(!grid[_gridId].is_lit, "cannot lite");
         require(citadel[_citadelId].timeLit == 0, "cannot lite");
 
         for (uint256 i; i < _pilotIds.length; ++i) {
@@ -201,7 +201,7 @@ contract StorageV2 is Ownable {
     }
 
     function swapGridSafe(uint256 _fromGrid, uint256 _toGrid) internal {
-        require(!grid[_toGrid].isLit, "cannot usurp lit grid");
+        require(!grid[_toGrid].is_lit, "cannot usurp lit grid");
         swapGrid(_fromGrid, _toGrid);
     }
 
@@ -217,7 +217,7 @@ contract StorageV2 is Ownable {
     }
 
     function getGrid(uint256 _gridId) internal view returns (uint256, bool, uint256, bool) {
-        return (grid[_gridId].citadelId, grid[_gridId].isCapital, grid[_gridId].sovereignUntil, grid[_gridId].isLit);
+        return (grid[_gridId].citadelId, grid[_gridId].isCapital, grid[_gridId].sovereignUntil, grid[_gridId].is_lit);
     }
 
     function getGridFromCitadel(uint256 _citadelId) internal view returns (uint256) {

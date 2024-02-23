@@ -73,7 +73,7 @@ Runs on http://localhost:8000/
 
     grid
         id: int
-        isLit: bool
+        is_lit: bool
         multiple: int
 
     raid (will be ethereum events)
@@ -108,7 +108,7 @@ Runs on http://localhost:8000/
         walletAddress: string,
         grid: {
             gridId: int,
-            isLit: true,
+            is_lit: true,
             multiple: int,
         },
         fleet: {
@@ -141,7 +141,7 @@ Runs on http://localhost:8000/
 
     grid: {
             gridId: int,
-            isLit: bool,
+            is_lit: bool,
             multiple: int,
             citadel: {
                 citadelId: int,
