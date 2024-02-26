@@ -4,7 +4,7 @@ queries = {
         SELECT c.id, c.wallet_address, c.grid_id, c.time_of_last_claim, c.time_lit, c.time_last_raided
         , c.unclaimed_drakma, c.capital_id, c.engine, c.weapon_system, c.shield
         , c.pilot_count
-        , g.is_lit, g.multiple
+        , g.is_lit
         , f.sif_gattaca, f.mhrudvog_throt, f.drebentraakht
         , f.sif_gattaca_training, f.mhrudvog_throt_training, f.drebentraakht_training
         , array_agg(p.pilot_id) as pilot_ids
@@ -14,7 +14,7 @@ queries = {
         GROUP BY c.id, c.wallet_address, c.grid_id, c.time_of_last_claim, c.time_lit, c.time_last_raided
         , c.unclaimed_drakma, c.capital_id, c.engine, c.weapon_system, c.shield
         , c.pilot_count
-        , g.is_lit, g.multiple
+        , g.is_lit
         , f.sif_gattaca, f.mhrudvog_throt, f.drebentraakht
         , f.sif_gattaca_training, f.mhrudvog_throt_training, f.drebentraakht_training
         ORDER BY c.id ASC
@@ -23,7 +23,7 @@ queries = {
         SELECT c.id, c.wallet_address, c.grid_id, c.time_of_last_claim, c.time_lit, c.time_last_raided
         , c.unclaimed_drakma, c.capital_id, c.engine, c.weapon_system, c.shield
         , c.pilot_count
-        , g.is_lit, g.multiple
+        , g.is_lit
         , f.sif_gattaca, f.mhrudvog_throt, f.drebentraakht
         , f.sif_gattaca_training, f.mhrudvog_throt_training, f.drebentraakht_training
         , array_agg(p.pilot_id) as pilotIds
@@ -34,7 +34,7 @@ queries = {
         GROUP BY c.id, c.wallet_address, c.grid_id, c.time_of_last_claim, c.time_lit, c.time_last_raided
         , c.unclaimed_drakma, c.capital_id, c.engine, c.weapon_system, c.shield
         , c.pilot_count
-        , g.is_lit, g.multiple
+        , g.is_lit
         , f.sif_gattaca, f.mhrudvog_throt, f.drebentraakht
         , f.sif_gattaca_training, f.mhrudvog_throt_training, f.drebentraakht_training
         ORDER BY c.id ASC
@@ -43,7 +43,7 @@ queries = {
         SELECT c.id, c.wallet_address, c.grid_id, c.time_of_last_claim, c.time_lit, c.time_last_raided
         , c.unclaimed_drakma, c.capital_id, c.engine, c.weapon_system, c.shield
         , c.pilot_count
-        , g.is_lit, g.multiple
+        , g.is_lit
         , f.sif_gattaca, f.mhrudvog_throt, f.drebentraakht
         , f.sif_gattaca_training, f.mhrudvog_throt_training, f.drebentraakht_training
         , array_agg(p.pilotId) as pilotIds
@@ -54,7 +54,7 @@ queries = {
         GROUP BY c.id, c.wallet_address, c.grid_id, c.time_of_last_claim, c.time_lit, c.time_last_raided
         , c.unclaimed_drakma, c.capital_id, c.engine, c.weapon_system, c.shield
         , c.pilot_count
-        , g.is_lit, g.multiple
+        , g.is_lit
         , f.sif_gattaca, f.mhrudvog_throt, f.drebentraakht
         , f.sif_gattaca_training, f.mhrudvog_throt_training, f.drebentraakht_training
     `,
@@ -96,13 +96,13 @@ queries = {
         WHERE citadel_id = $7
     `,
     GET_ALL_GRID: `
-        SELECT g.id, g.multiple, g.is_lit
+        SELECT g.id, g.is_lit
         , c.id as citadel_id, c.wallet_address, c.capital_id
         FROM grid g LEFT JOIN citadel c ON (g.id = c.grid_id)
         order by g.id ASC
     `,
     GET_GRID: `
-        SELECT g.id, g.multiple, g.is_lit
+        SELECT g.id, g.is_lit
         , c.id as citadel_id, c.wallet_address, c.capital_id
         FROM grid g LEFT JOIN citadel c ON (g.id = c.grid_id)
         WHERE g.id = $1
@@ -120,16 +120,16 @@ queries = {
     GET_ALL_RAIDS: `
         SELECT from_citadel, to_citadel, sif_gattaca, mhrudvog_throt, drebentraakht
         , pilot_count, time_siege_hits
-        FROM activeRaids
+        FROM siege
         WHERE to_citadel != 0
         ORDER BY from_citadel
     `,
     DELETE_CITADEL_PILOT: `
-        DELETE FROM citadelPilot 
+        DELETE FROM citadel_pilot 
         WHERE citadel_id = $1
     `,
     INSERT_CITADEL_PILOT: `
-        INSERT INTO citadelPilot(citadel_id, pilotId)
+        INSERT INTO citadel_pilot(citadel_id, pilot_id)
         VALUES($1, $2)
     `,
     UPSERT_REPORT: `

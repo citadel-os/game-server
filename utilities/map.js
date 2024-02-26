@@ -6,8 +6,7 @@ function mapCitadel(dbCitadel) {
         walletAddress: dbCitadel.wallet_address,
         grid: {
             gridId: dbCitadel.grid_id,
-            is_lit: dbCitadel.is_lit,
-            multiple: dbCitadel.multiple
+            is_lit: dbCitadel.is_lit
         },
         fleet: {
             sifGattaca: dbCitadel.sif_gattaca,
@@ -29,7 +28,7 @@ function mapCitadel(dbCitadel) {
         shield: constants.SHIELD[dbCitadel.shield],
         level: 0
     };
-    if(dbCitadel.pilotids[0] != null) {
+    if(dbCitadel.pilotids != null) {
         citadel.pilots = dbCitadel.pilotids;
     }
 
@@ -40,7 +39,6 @@ function mapGrid(dbGrid) {
     const grid = {
         id: dbGrid.id,
         is_lit: dbGrid.is_lit,
-        multiple: dbGrid.multiple,
         citadel: {
             citadelId: dbGrid.citadel_id,
             walletAddress: dbGrid.wallet_address,

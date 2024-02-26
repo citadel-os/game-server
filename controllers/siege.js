@@ -48,4 +48,4 @@ class SiegeController {
 
 
 
-module.exports = new RaidController();
+module.exports = new SiegeController();
